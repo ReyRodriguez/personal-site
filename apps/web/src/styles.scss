@@ -1,3 +1,9 @@
+@property --border-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -126,6 +132,12 @@ body::after {
   }
 }
 
+@keyframes rotate-border-angle {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -159,8 +171,21 @@ textarea {
   }
 
   .hover-border-glow:hover {
-    border-color: rgb(0 241 254 / 0.5);
-    box-shadow: 0 0 20px rgb(0 241 254 / 0.1);
+    border-color: transparent;
+    background-image: 
+      linear-gradient(var(--color-surface-glass), var(--color-surface-glass)), 
+      conic-gradient(
+        from var(--border-angle),
+        var(--color-cyan) 0%,
+        var(--color-purple) 25%,
+        var(--color-green) 50%,
+        var(--color-purple) 75%,
+        var(--color-cyan) 100%
+      );
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    animation: rotate-border-angle 3s linear infinite;
+    box-shadow: 0 0 20px rgb(0 241 254 / 0.15);
   }
 
   .btn-glitch {
