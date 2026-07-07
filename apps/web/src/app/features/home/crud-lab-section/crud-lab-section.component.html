@@ -1,0 +1,118 @@
+<section id="crud" class="crud-shell scroll-mt-28 px-5 py-24 sm:px-8 lg:px-20">
+  <div
+    class="mx-auto grid w-full max-w-[var(--layout-max)] gap-8 lg:grid-cols-[0.7fr_1.3fr]"
+  >
+    <div class="section-copy">
+      <p class="terminal-label text-electric-cyan">CRUD.LAB / SIGNAL_STATE</p>
+      <h2
+        class="mt-5 text-4xl font-semibold leading-tight text-text-primary sm:text-5xl"
+      >
+        Operational CRUD Lab
+      </h2>
+      <p class="mt-5 max-w-2xl text-base leading-8 text-text-muted">
+        Mini dashboard para demostrar formularios, estado derivado, busqueda,
+        acciones por fila y feedback operacional sin perder la estetica
+        terminal.
+      </p>
+
+      <dl class="crud-stats mt-8">
+        <div>
+          <dt>Total</dt>
+          <dd>{{ stats().total }}</dd>
+        </div>
+        <div>
+          <dt>Active</dt>
+          <dd>{{ stats().active }}</dd>
+        </div>
+        <div>
+          <dt>Done</dt>
+          <dd>{{ stats().done }}</dd>
+        </div>
+        <div>
+          <dt>High</dt>
+          <dd>{{ stats().high }}</dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="grid gap-5">
+      <form
+        class="glass-panel hover-border-glow crud-form"
+        (submit)="createItem(); $event.preventDefault()"
+      >
+        <label>
+          <span>Title</span>
+          <input
+            [value]="draft().title"
+            (input)="updateTitle($event)"
+            placeholder="Work item title"
+          />
+        </label>
+        <label>
+          <span>Owner</span>
+          <input
+            [value]="draft().owner"
+            (input)="updateOwner($event)"
+            placeholder="API, Frontend, Database"
+          />
+        </label>
+        <label>
+          <span>Priority</span>
+          <select [value]="draft().priority" (change)="updatePriority($event)">
+            <option value="low">low</option>
+            <option value="medium">medium</option>
+            <option value="high">high</option>
+          </select>
+        </label>
+        <button class="btn-glitch crud-submit" type="submit">
+          CREATE_ROW()
+        </button>
+      </form>
+
+      <div class="glass-panel hover-border-glow crud-table-shell">
+        <div class="crud-toolbar">
+          <p class="terminal-label text-matrix-green">work_items.table</p>
+          <input
+            type="search"
+            [value]="query()"
+            (input)="updateQuery($event)"
+            placeholder="filter rows..."
+            aria-label="Filtrar work items"
+          />
+        </div>
+
+        <div class="crud-table">
+          @for (item of filteredItems(); track item.id) {
+            <article class="crud-row">
+              <div>
+                <p class="crud-id">#{{ item.id }} / {{ item.owner }}</p>
+                <h3>{{ item.title }}</h3>
+              </div>
+              <span class="crud-priority" [class]="'priority-' + item.priority">
+                {{ item.priority }}
+              </span>
+              <button
+                class="crud-status"
+                [class]="'status-' + item.status"
+                type="button"
+                (click)="cycleStatus(item.id)"
+              >
+                {{ item.status }}
+              </button>
+              <button
+                class="crud-delete"
+                type="button"
+                (click)="deleteItem(item.id)"
+                aria-label="Eliminar fila"
+              >
+                DEL
+              </button>
+            </article>
+          } @empty {
+            <p class="empty-state">No rows match current filter.</p>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,121 @@
+:host {
+  display: block;
+}
+
+.systems-shell {
+  position: relative;
+  background:
+    radial-gradient(
+      circle at 82% 18%,
+      rgb(116 29 255 / 0.08),
+      transparent 28rem
+    ),
+    radial-gradient(circle at 22% 84%, rgb(0 241 254 / 0.06), transparent 30rem);
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.tab-button {
+  border: 1px solid rgb(255 255 255 / 0.12);
+  padding: 0.7rem 1rem;
+  color: var(--color-muted);
+  background: transparent;
+  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.tab-button:hover,
+.tab-button-active {
+  border-color: rgb(0 230 57 / 0.5);
+  color: var(--color-green);
+  box-shadow: 0 0 15px rgb(0 230 57 / 0.12);
+}
+
+.blueprint-panel,
+.system-card {
+  padding: 1.5rem;
+}
+
+.blueprint-code {
+  margin: 1.5rem 0 0;
+  overflow-x: auto;
+  border-top: 1px solid rgb(255 255 255 / 0.08);
+  padding-top: 1rem;
+  color: rgb(0 230 57 / 0.78);
+  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.82rem;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+.pipeline-step {
+  display: grid;
+  grid-template-columns: 0.34fr 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
+  border: 1px solid rgb(0 230 57 / 0.2);
+  padding: 0.8rem;
+  color: var(--color-muted);
+}
+
+.pipeline-step span,
+.pipeline-step strong,
+.pipeline-step code,
+.budget-grid dt,
+.budget-grid dd {
+  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.72rem;
+}
+
+.pipeline-step span,
+.pipeline-step strong {
+  color: var(--color-green);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.pipeline-step code {
+  color: rgb(229 225 228 / 0.72);
+}
+
+.step-ready {
+  border-color: rgb(0 241 254 / 0.22);
+}
+
+.step-ready span,
+.step-ready strong {
+  color: var(--color-cyan);
+}
+
+.budget-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.budget-grid div {
+  border-top: 1px solid rgb(255 255 255 / 0.08);
+  padding-top: 0.85rem;
+}
+
+.budget-grid dt {
+  color: var(--color-muted);
+  text-transform: uppercase;
+}
+
+.budget-grid dd {
+  margin: 0.4rem 0 0;
+  color: var(--color-cyan);
+}
+
+@media (max-width: 720px) {
+  .pipeline-step {
+    grid-template-columns: 1fr;
+  }
+}

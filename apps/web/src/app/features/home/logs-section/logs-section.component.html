@@ -1,0 +1,28 @@
+<section id="logs" class="logs-shell scroll-mt-28 px-5 py-24 sm:px-8 lg:px-20">
+  <div class="mx-auto w-full max-w-[var(--layout-max)]">
+    <h2
+      class="mb-8 text-3xl font-semibold leading-tight text-text-primary sm:text-4xl"
+    >
+      SYSTEM_LOGS
+    </h2>
+
+    <div class="border-t border-white/10">
+      @for (log of logs; track log.timestamp) {
+        <article class="log-row group">
+          <time class="font-mono text-sm text-text-muted/50">
+            {{ log.timestamp }}
+          </time>
+          <div>
+            <p class="terminal-label mb-2 text-matrix-green">{{ log.tag }}</p>
+            <h3
+              class="text-2xl font-semibold leading-tight text-text-primary transition-colors group-hover:text-electric-cyan"
+            >
+              {{ log.title }}
+            </h3>
+          </div>
+          <span class="log-arrow" aria-hidden="true">-></span>
+        </article>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,78 @@
+:host {
+  display: block;
+}
+
+.capability-shell {
+  position: relative;
+  background:
+    radial-gradient(circle at 12% 16%, rgb(0 230 57 / 0.06), transparent 26rem),
+    radial-gradient(
+      circle at 88% 78%,
+      rgb(116 29 255 / 0.08),
+      transparent 30rem
+    );
+}
+
+.capability-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.capability-card {
+  min-height: 100%;
+  padding: 1.25rem;
+}
+
+.capability-id,
+.capability-status,
+.capability-chip {
+  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.capability-id {
+  color: var(--color-cyan);
+}
+
+.capability-status {
+  border: 1px solid rgb(255 255 255 / 0.1);
+  padding: 0.28rem 0.45rem;
+  color: rgb(185 204 178 / 0.7);
+}
+
+.status-live {
+  border-color: rgb(0 230 57 / 0.38);
+  color: var(--color-green);
+}
+
+.status-blueprint {
+  border-color: rgb(0 241 254 / 0.28);
+  color: var(--color-cyan);
+}
+
+.status-next {
+  border-color: rgb(209 188 255 / 0.26);
+  color: #d1bcff;
+}
+
+.capability-chip {
+  background: #2a2a2c;
+  color: rgb(229 225 228 / 0.78);
+  padding: 0.3rem 0.45rem;
+}
+
+@media (min-width: 720px) {
+  .capability-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1120px) {
+  .capability-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

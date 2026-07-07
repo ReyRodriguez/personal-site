@@ -1,0 +1,57 @@
+:host {
+  display: block;
+}
+
+.flux-shell {
+  position: relative;
+}
+
+.pipeline-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgb(0 230 57 / 0.2),
+    rgb(116 29 255 / 0.2)
+  );
+}
+
+.flux-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.flux-icon {
+  display: grid;
+  width: 4rem;
+  height: 4rem;
+  place-items: center;
+  border-radius: 999px;
+  color: rgb(185 204 178 / 0.68);
+  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.95rem;
+  font-weight: 900;
+}
+
+.flux-icon.tone-green {
+  color: rgb(0 230 57 / 0.82);
+}
+
+.flux-icon.tone-cyan {
+  color: rgb(0 241 254 / 0.8);
+}
+
+.flux-icon.tone-purple {
+  color: rgb(209 188 255 / 0.8);
+}
+
+.flux-node:hover .flux-icon {
+  color: var(--color-green-soft);
+}

@@ -1,0 +1,103 @@
+:host {
+  display: block;
+}
+
+.projects-shell {
+  position: relative;
+  background:
+    radial-gradient(
+      circle at 18% 12%,
+      rgb(116 29 255 / 0.12),
+      transparent 28rem
+    ),
+    radial-gradient(circle at 78% 78%, rgb(0 241 254 / 0.1), transparent 30rem);
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  border-color: rgb(255 255 255 / 0.2);
+}
+
+.project-icon {
+  color: rgb(132 150 126 / 0.6);
+  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-size: 1.4rem;
+  font-weight: 900;
+  transition: color 200ms ease;
+}
+
+.project-card:hover .project-icon {
+  color: var(--color-green-soft);
+}
+
+.project-title {
+  transition: color 200ms ease;
+}
+
+.project-card:hover .project-title {
+  color: #74f5ff;
+}
+
+.project-live {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: rgb(0 230 57 / 0.5);
+  transition:
+    opacity 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.project-card:hover .project-live {
+  opacity: 1;
+  box-shadow: 0 0 14px rgb(0 230 57 / 0.72);
+}
+
+.project-period {
+  flex: 0 0 auto;
+  border: 1px solid rgb(0 241 254 / 0.22);
+  padding: 0.45rem 0.55rem;
+  color: rgb(0 241 254 / 0.82);
+  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.project-chip {
+  border: 0;
+  padding: 0.32rem 0.5rem;
+  color: rgb(229 225 228 / 0.82);
+  background: #2a2a2c;
+  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.project-signal {
+  border-left: 2px solid var(--color-green);
+  padding-left: 0.8rem;
+  color: var(--color-muted);
+  font-size: 0.86rem;
+}
+
+@media (min-width: 860px) {
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1180px) {
+  .project-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

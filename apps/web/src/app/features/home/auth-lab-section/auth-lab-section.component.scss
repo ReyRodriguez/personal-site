@@ -1,0 +1,137 @@
+:host {
+  display: block;
+}
+
+.auth-lab-shell {
+  position: relative;
+  background:
+    radial-gradient(circle at 8% 20%, rgb(0 255 65 / 0.1), transparent 22rem),
+    radial-gradient(circle at 84% 38%, rgb(0 241 254 / 0.11), transparent 28rem);
+}
+
+.section-copy {
+  align-self: center;
+}
+
+.guard-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  border: 1px solid rgb(255 255 255 / 0.1);
+  padding: 0.85rem 1rem;
+  color: rgb(185 204 178 / 0.7);
+  background: rgb(255 255 255 / 0.035);
+  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.8rem;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 10px) 0,
+    100% 10px,
+    100% 100%,
+    10px 100%,
+    0 calc(100% - 10px)
+  );
+}
+
+.guard-row-passed {
+  border-color: rgb(0 255 65 / 0.36);
+  color: var(--color-green);
+}
+
+.guard-pip {
+  width: 0.5rem;
+  height: 0.5rem;
+  background: currentColor;
+  box-shadow: 0 0 14px currentColor;
+}
+
+.auth-state {
+  border: 1px solid rgb(255 255 255 / 0.12);
+  padding: 0.45rem 0.65rem;
+  color: rgb(229 225 228 / 0.5);
+  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.auth-state-live {
+  border-color: rgb(0 255 65 / 0.42);
+  color: var(--color-green);
+  box-shadow: 0 0 18px rgb(0 255 65 / 0.16);
+}
+
+.field-shell {
+  display: grid;
+  gap: 0.55rem;
+  color: var(--color-muted);
+  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.field-shell input {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgb(0 241 254 / 0.36);
+  border-radius: 0;
+  outline: 0;
+  padding: 0.9rem 0;
+  color: var(--color-text);
+  background: transparent;
+  font-size: 0.95rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.field-shell input:focus {
+  border-color: var(--color-cyan);
+  box-shadow: 0 10px 24px -20px rgb(0 241 254 / 0.8);
+}
+
+.auth-error {
+  margin: 0;
+  border-left: 2px solid #ffb4ab;
+  padding-left: 0.85rem;
+  color: #ffb4ab;
+  font-size: 0.85rem;
+}
+
+.lab-action {
+  min-height: 3rem;
+  padding: 0 1.1rem;
+  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.lab-terminal,
+.claims-output {
+  margin: 1.1rem 0 0;
+  overflow-x: auto;
+  color: var(--color-muted);
+  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.78rem;
+  line-height: 1.85;
+  white-space: pre-wrap;
+}
+
+.claims-output {
+  min-height: 13.5rem;
+  color: rgb(0 241 254 / 0.84);
+}
+
+.token-line {
+  margin: 1rem 0 0;
+  overflow-wrap: anywhere;
+  border-top: 1px solid var(--color-line);
+  padding-top: 1rem;
+  color: rgb(0 255 65 / 0.82);
+  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.72rem;
+  line-height: 1.7;
+}

@@ -1,0 +1,297 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --color-void: #030014;
+  --color-surface: #09090b;
+  --color-surface-glass: rgb(19 19 21 / 0.6);
+  --color-surface-raised: #131315;
+  --color-text: #e5e1e4;
+  --color-muted: #b9ccb2;
+  --color-line: rgb(255 255 255 / 0.12);
+  --color-cyan: #00f1fe;
+  --color-green: #00ff41;
+  --color-green-soft: #72ff70;
+  --color-purple: #741dff;
+  --layout-max: 1440px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--color-void);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--color-text);
+  background:
+    radial-gradient(
+      circle at 86% -10%,
+      rgb(0 230 57 / 0.07),
+      transparent 38rem
+    ),
+    radial-gradient(
+      circle at -12% 92%,
+      rgb(116 29 255 / 0.08),
+      transparent 42rem
+    ),
+    radial-gradient(
+      circle at 46% 18%,
+      rgb(0 241 254 / 0.06),
+      transparent 34rem
+    ),
+    linear-gradient(180deg, #030014 0%, #07070d 48%, #030014 100%);
+  font-family: 'Geist Variable', Inter, ui-sans-serif, system-ui, sans-serif;
+  text-rendering: geometricPrecision;
+}
+
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  content: '';
+  background: radial-gradient(
+    circle at center,
+    rgb(255 255 255 / 0.035) 1px,
+    transparent 1.2px
+  );
+  background-size: 80px 80px;
+  mask-image: linear-gradient(to bottom, rgb(0 0 0 / 0.9), transparent 82%);
+  opacity: 0.22;
+}
+
+body::after {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  content: '';
+  background-image:
+    linear-gradient(rgb(255 255 255 / 0.025), rgb(255 255 255 / 0.025)),
+    radial-gradient(
+      circle at 50% 0%,
+      rgb(255 255 255 / 0.08),
+      transparent 24rem
+    );
+  mix-blend-mode: screen;
+  opacity: 0.42;
+}
+
+@keyframes jitter {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  25% {
+    transform: translate(-1px, 1px);
+  }
+
+  50% {
+    transform: translate(1px, -1px);
+  }
+
+  75% {
+    transform: translate(-1px, -1px);
+  }
+
+  100% {
+    transform: translate(1px, 1px);
+  }
+}
+
+@keyframes ping {
+  75%,
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+
+@keyframes terminalScroll {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-58%);
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+::selection {
+  color: #001114;
+  background: var(--color-cyan);
+}
+
+@layer components {
+  .glass-panel {
+    border: 1px solid rgb(255 255 255 / 0.1);
+    background-color: var(--color-surface-glass);
+    backdrop-filter: blur(12px);
+  }
+
+  .hover-border-glow {
+    transition:
+      border-color 300ms ease,
+      box-shadow 300ms ease,
+      background-color 300ms ease,
+      color 300ms ease,
+      transform 300ms ease;
+  }
+
+  .hover-border-glow:hover {
+    border-color: rgb(0 241 254 / 0.5);
+    box-shadow: 0 0 20px rgb(0 241 254 / 0.1);
+  }
+
+  .btn-glitch {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 0.2);
+    color: var(--color-text);
+    background: transparent;
+    transition:
+      border-color 200ms ease,
+      box-shadow 200ms ease,
+      color 200ms ease,
+      background-color 200ms ease;
+  }
+
+  .btn-glitch:hover {
+    border-color: var(--color-green-soft);
+    color: #002203;
+    background-color: var(--color-green-soft);
+    box-shadow: 0 0 15px var(--color-green-soft);
+    animation: jitter 100ms infinite;
+  }
+
+  .btn-ghost {
+    border: 1px solid transparent;
+    color: rgb(185 204 178 / 0.78);
+    background: transparent;
+    transition:
+      border-color 200ms ease,
+      color 200ms ease;
+  }
+
+  .btn-ghost:hover {
+    border-color: rgb(132 150 126 / 0.5);
+    color: var(--color-text);
+  }
+
+  .status-ping {
+    position: relative;
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #00e639;
+  }
+
+  .status-ping::after {
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    width: 16px;
+    height: 16px;
+    content: '';
+    border: 1px solid #00e639;
+    border-radius: 50%;
+    animation: ping 1500ms cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  .hud-panel {
+    position: relative;
+    border: 1px solid rgb(255 255 255 / 0.1);
+    background-color: rgb(19 19 21 / 0.6);
+    backdrop-filter: blur(12px);
+  }
+
+  .hud-panel::before {
+    display: none;
+  }
+
+  .terminal-label {
+    font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .focus-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-cyan);
+    font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+    font-size: 0.875rem;
+  }
+
+  .focus-link::before {
+    content: '//';
+    color: var(--color-green);
+  }
+
+  .terminal-window {
+    display: flex;
+    min-height: 25rem;
+    overflow: hidden;
+    flex-direction: column;
+    border-color: rgb(255 255 255 / 0.2);
+    background:
+      linear-gradient(180deg, rgb(255 255 255 / 0.04), transparent 34%),
+      rgb(19 19 21 / 0.62);
+  }
+
+  .terminal-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(255 255 255 / 0.1);
+    padding: 0.6rem 1rem;
+    background: rgb(42 42 44 / 0.66);
+  }
+
+  .terminal-dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background: #3b4b37;
+  }
+
+  .terminal-scroll {
+    position: relative;
+    flex: 1;
+    overflow: hidden;
+    padding: 1.5rem;
+    color: rgb(0 230 57 / 0.76);
+    font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+    font-size: 0.84rem;
+    line-height: 1.7;
+  }
+
+  .terminal-content {
+    white-space: pre-wrap;
+    animation: terminalScroll 20s linear infinite;
+  }
+}

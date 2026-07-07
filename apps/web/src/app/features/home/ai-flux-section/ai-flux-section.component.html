@@ -1,0 +1,39 @@
+<section
+  id="workflow"
+  class="flux-shell scroll-mt-28 px-5 py-24 sm:px-8 lg:px-20"
+>
+  <div class="mx-auto w-full max-w-[var(--layout-max)]">
+    <div class="mb-16 flex items-center gap-4">
+      <h2
+        class="text-3xl font-semibold leading-tight text-text-primary sm:text-4xl"
+      >
+        AI FLUX ARCHITECTURE
+      </h2>
+      <div class="h-px flex-1 bg-white/10"></div>
+    </div>
+
+    <div class="relative py-8">
+      <div class="pipeline-line hidden md:block"></div>
+      <div class="relative z-10 grid grid-cols-1 gap-8 md:grid-cols-4">
+        @for (node of nodes; track node.title) {
+          <article class="flux-node group">
+            <div
+              class="flux-icon glass-panel hover-border-glow"
+              [class]="'tone-' + node.tone"
+            >
+              {{ node.icon }}
+            </div>
+            <div>
+              <h3 class="terminal-label mb-2 text-text-primary">
+                {{ node.title }}
+              </h3>
+              <p class="font-mono text-sm leading-6 text-text-muted/60">
+                {{ node.summary }}
+              </p>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+  </div>
+</section>

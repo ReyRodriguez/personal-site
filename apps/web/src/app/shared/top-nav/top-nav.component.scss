@@ -1,0 +1,86 @@
+:host {
+  display: contents;
+}
+
+.top-nav-shell {
+  pointer-events: none;
+}
+
+.top-nav {
+  pointer-events: auto;
+  border-bottom: 1px solid rgb(59 75 55 / 0.5);
+  background: rgb(19 19 21 / 0.6);
+  backdrop-filter: blur(12px);
+}
+
+.brand-code,
+.nav-link,
+.status-cluster {
+  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.brand-code {
+  font-size: 0.74rem;
+  text-shadow: 0 0 16px rgb(0 255 65 / 0.42);
+}
+
+.nav-links {
+  scrollbar-width: none;
+}
+
+.nav-links::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-link {
+  display: inline-flex;
+  min-height: 2.5rem;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0 0.75rem;
+  color: rgb(229 225 228 / 0.48);
+  font-size: 0.75rem;
+  transition:
+    color 160ms ease,
+    transform 160ms ease,
+    text-shadow 160ms ease,
+    background-color 160ms ease;
+}
+
+.nav-link span {
+  color: rgb(0 241 254 / 0.45);
+}
+
+.nav-link:hover,
+.nav-link-active {
+  color: var(--color-green);
+  transform: skewX(-5deg);
+  text-shadow: 0 0 18px rgb(0 255 65 / 0.45);
+}
+
+.nav-link-active span {
+  color: var(--color-green);
+}
+
+.status-cluster {
+  color: rgb(229 225 228 / 0.58);
+}
+
+@media (max-width: 760px) {
+  .top-nav {
+    justify-content: flex-start;
+    overflow: hidden;
+    padding-inline: 1rem;
+  }
+
+  .brand-code {
+    display: none;
+  }
+
+  .nav-links {
+    justify-content: flex-start;
+  }
+}

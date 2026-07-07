@@ -1,0 +1,72 @@
+<section
+  id="projects"
+  class="projects-shell scroll-mt-28 px-5 py-24 sm:px-8 lg:px-20"
+>
+  <div class="mx-auto w-full max-w-[var(--layout-max)]">
+    <div class="mb-10 grid gap-5 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+      <div>
+        <p class="terminal-label text-electric-cyan">
+          PROJECTS.INDEX / FIELD_WORK
+        </p>
+        <h2
+          class="mt-5 text-4xl font-semibold leading-tight text-text-primary sm:text-5xl"
+        >
+          DEPLOYED MODULES
+        </h2>
+      </div>
+      <p
+        class="max-w-3xl text-base leading-8 text-text-muted lg:justify-self-end"
+      >
+        Selección de experiencias reales enfocadas en Angular, GraphQL,
+        performance, UX operacional e integraciones backend.
+      </p>
+    </div>
+
+    <div class="project-grid">
+      @for (project of projects; track project.company) {
+        <article class="project-card glass-panel hover-border-glow group p-6">
+          <div class="flex items-start justify-between gap-4">
+            <span class="project-icon">{{ project.icon }}</span>
+            <span class="project-live" aria-hidden="true"></span>
+          </div>
+
+          <div class="mt-6 flex items-start justify-between gap-4">
+            <div>
+              <p class="terminal-label text-matrix-green">
+                {{ project.company }}
+              </p>
+              <h3
+                class="project-title mt-4 text-2xl font-semibold leading-tight text-text-primary"
+              >
+                {{ project.title }}
+              </h3>
+            </div>
+            <span class="project-period">{{ project.period }}</span>
+          </div>
+
+          <p class="mt-5 flex-1 text-sm leading-7 text-text-muted">
+            {{ project.impact }}
+          </p>
+
+          <div class="mt-6">
+            <p class="terminal-label text-electric-cyan">stack</p>
+            <ul class="mt-3 flex flex-wrap gap-2">
+              @for (tech of project.stack; track tech) {
+                <li class="project-chip">{{ tech }}</li>
+              }
+            </ul>
+          </div>
+
+          <div class="mt-6 border-t border-white/5 pt-5">
+            <p class="terminal-label text-matrix-green">signals</p>
+            <ul class="mt-3 grid gap-2">
+              @for (signal of project.signals; track signal) {
+                <li class="project-signal">{{ signal }}</li>
+              }
+            </ul>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

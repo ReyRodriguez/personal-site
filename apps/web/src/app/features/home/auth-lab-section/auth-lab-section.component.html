@@ -1,0 +1,111 @@
+<section
+  id="auth"
+  class="auth-lab-shell scroll-mt-28 px-5 py-24 sm:px-8 lg:px-20"
+>
+  <div
+    class="mx-auto grid w-full max-w-[var(--layout-max)] gap-8 lg:grid-cols-[0.88fr_1.12fr]"
+  >
+    <div class="section-copy">
+      <p class="terminal-label text-matrix-green">
+        SECURITY.SHOWCASE / JWT_FLOW
+      </p>
+      <h2
+        class="mt-5 text-4xl font-semibold leading-tight text-text-primary sm:text-5xl"
+      >
+        JWT Auth Lab
+      </h2>
+      <p class="mt-5 max-w-2xl text-base leading-8 text-text-muted sm:text-lg">
+        Una experiencia interactiva para evidenciar autenticacion por token,
+        claims, expiracion, roles y guards en una interfaz auditable.
+      </p>
+
+      <div class="mt-8 grid gap-3">
+        @for (check of guardChecks(); track check.label) {
+          <div class="guard-row" [class.guard-row-passed]="check.passed">
+            <span class="guard-pip" aria-hidden="true"></span>
+            <span>{{ check.label }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="grid gap-5">
+      <div class="hud-panel hover-border-glow p-5 sm:p-6">
+        <div
+          class="mb-6 flex items-start justify-between gap-4 border-b border-surface-line pb-5"
+        >
+          <div>
+            <p class="terminal-label text-electric-cyan">auth.console</p>
+            <p class="mt-2 font-mono text-xs text-text-muted">
+              strategy.jwt.local
+            </p>
+          </div>
+          <span class="auth-state" [class.auth-state-live]="isAuthenticated()">
+            {{ isAuthenticated() ? 'SESSION_ACTIVE' : 'SESSION_IDLE' }}
+          </span>
+        </div>
+
+        <form class="grid gap-4" (submit)="login(); $event.preventDefault()">
+          <label class="field-shell">
+            <span>Email</span>
+            <input
+              type="email"
+              autocomplete="username"
+              [value]="draft().email"
+              (input)="updateEmail($event)"
+              aria-label="Email para demo JWT"
+            />
+          </label>
+
+          <label class="field-shell">
+            <span>Password</span>
+            <input
+              type="password"
+              autocomplete="current-password"
+              [value]="draft().password"
+              (input)="updatePassword($event)"
+              aria-label="Password para demo JWT"
+            />
+          </label>
+
+          @if (authError()) {
+            <p class="auth-error">{{ authError() }}</p>
+          }
+
+          <div class="mt-2 flex flex-col gap-3 sm:flex-row">
+            <button class="lab-action btn-glitch" type="submit">
+              Emitir JWT
+            </button>
+            <button
+              class="lab-action btn-ghost"
+              type="button"
+              (click)="logout()"
+            >
+              Revocar sesión
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="grid gap-5 xl:grid-cols-2">
+        <div
+          id="auth-trace"
+          class="hud-panel hover-border-glow scroll-mt-28 p-5 sm:p-6"
+        >
+          <p class="terminal-label text-matrix-green">api.trace</p>
+          <pre
+            class="lab-terminal"
+          ><code>@for (line of apiTrace(); track line) {
+{{ line }}
+}</code></pre>
+          <p class="token-line">{{ visibleToken() }}</p>
+        </div>
+
+        <div class="hud-panel hover-border-glow p-5 sm:p-6">
+          <p class="terminal-label text-electric-cyan">decoded.claims</p>
+          <pre class="claims-output"><code>{{ decodedClaims() }}</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

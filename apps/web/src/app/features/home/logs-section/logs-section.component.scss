@@ -1,0 +1,49 @@
+:host {
+  display: block;
+}
+
+.logs-shell {
+  position: relative;
+}
+
+.log-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  align-items: center;
+  border-bottom: 1px solid rgb(255 255 255 / 0.1);
+  padding: 1.5rem 0;
+  cursor: pointer;
+  transition:
+    background-color 200ms ease,
+    padding-inline 200ms ease;
+}
+
+.log-row:hover {
+  padding-inline: 1rem;
+  background: rgb(255 255 255 / 0.02);
+}
+
+.log-arrow {
+  justify-self: start;
+  color: rgb(132 150 126 / 0.64);
+  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  transition:
+    color 200ms ease,
+    transform 200ms ease;
+}
+
+.log-row:hover .log-arrow {
+  color: var(--color-green-soft);
+  transform: translateX(4px);
+}
+
+@media (min-width: 768px) {
+  .log-row {
+    grid-template-columns: 0.3fr 1fr auto;
+  }
+
+  .log-arrow {
+    justify-self: end;
+  }
+}

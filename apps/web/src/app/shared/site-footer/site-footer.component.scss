@@ -1,0 +1,27 @@
+:host {
+  display: block;
+}
+
+.site-footer {
+  border-top: 1px solid rgb(59 75 55 / 0.4);
+  background: #0e0e10;
+}
+
+.footer-link {
+  color: var(--color-muted);
+  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition:
+    color 180ms ease,
+    text-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.footer-link:hover {
+  color: var(--color-cyan);
+  text-shadow: 0 0 18px rgb(0 241 254 / 0.35);
+  transform: skewX(-5deg);
+}

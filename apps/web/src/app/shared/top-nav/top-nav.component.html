@@ -1,0 +1,37 @@
+<header class="top-nav-shell fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5">
+  <nav
+    class="top-nav mx-auto flex h-14 max-w-[var(--layout-max)] items-center justify-between gap-4 px-4 sm:px-8"
+    aria-label="Navegacion principal"
+  >
+    <a
+      class="brand-code shrink-0 text-matrix-green"
+      href="#root"
+      (click)="activate('root')"
+      aria-label="Ir al inicio"
+    >
+      NEURAL_ARCHITECT_V1.0
+    </a>
+
+    <div
+      class="nav-links flex min-w-0 flex-1 justify-center gap-2 overflow-x-auto"
+    >
+      @for (item of navItems; track item.id) {
+        <a
+          class="nav-link"
+          [class.nav-link-active]="activeSection() === item.id"
+          [href]="'#' + item.id"
+          (click)="activate(item.id)"
+        >
+          <span aria-hidden="true">//</span>{{ item.label }}
+        </a>
+      }
+    </div>
+
+    <div
+      class="status-cluster hidden shrink-0 items-center gap-2 font-mono text-xs sm:flex"
+    >
+      <span>Status: Online</span>
+      <span class="status-ping ml-2 opacity-60" aria-hidden="true"></span>
+    </div>
+  </nav>
+</header>
