@@ -162,6 +162,7 @@ textarea {
   }
 
   .hover-border-glow {
+    position: relative;
     transition:
       border-color 300ms ease,
       box-shadow 300ms ease,
@@ -170,22 +171,42 @@ textarea {
       transform 300ms ease;
   }
 
+  .hover-border-glow::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(
+      from var(--border-angle),
+      var(--color-cyan) 0%,
+      var(--color-purple) 25%,
+      var(--color-green) 50%,
+      var(--color-purple) 75%,
+      var(--color-cyan) 100%
+    );
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 300ms ease;
+  }
+
   .hover-border-glow:hover {
     border-color: transparent;
-    background-image: 
-      linear-gradient(var(--color-surface-glass), var(--color-surface-glass)), 
-      conic-gradient(
-        from var(--border-angle),
-        var(--color-cyan) 0%,
-        var(--color-purple) 25%,
-        var(--color-green) 50%,
-        var(--color-purple) 75%,
-        var(--color-cyan) 100%
-      );
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-    animation: rotate-border-angle 3s linear infinite;
     box-shadow: 0 0 20px rgb(0 241 254 / 0.15);
+  }
+
+  .hover-border-glow:hover::before {
+    opacity: 1;
+    animation: rotate-border-angle 3s linear infinite;
   }
 
   .btn-glitch {
