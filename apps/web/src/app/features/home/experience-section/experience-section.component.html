@@ -1,0 +1,120 @@
+<section
+  id="experience"
+  class="experience-shell scroll-mt-28 px-5 py-24 sm:px-8 lg:px-20"
+>
+  <div class="mx-auto w-full max-w-[var(--layout-max)]">
+    <!-- Section Header -->
+    <div class="mb-16 grid gap-5 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+      <div>
+        <p class="terminal-label text-electric-cyan">
+          HISTORY.LOG / WORK_RECORD
+        </p>
+        <h2
+          class="mt-5 text-4xl font-semibold leading-tight text-text-primary sm:text-5xl"
+        >
+          EXPERIENCIA LABORAL
+        </h2>
+      </div>
+      <p
+        class="max-w-3xl text-base leading-8 text-text-muted lg:justify-self-end"
+      >
+        Línea temporal de mi trayectoria en desarrollo de software, desde mis
+        inicios hasta roles de nivel senior e integraciones avanzadas con IA.
+      </p>
+    </div>
+
+    <!-- Timeline Body -->
+    <div class="timeline-container relative pl-6 sm:pl-10">
+      <!-- Main Vertical Rail -->
+      <div class="timeline-line absolute left-3 top-2 bottom-2 w-px bg-white/10 sm:left-4"></div>
+
+      <!-- Loop Items -->
+      <div class="grid gap-12">
+        @for (item of experiences(); track $index; let last = $last) {
+          <div
+            class="timeline-item relative"
+            (mouseenter)="setHovered($index)"
+            (mouseleave)="setHovered(null)"
+          >
+            <!-- Glowing Timeline Pin -->
+            <div
+              class="timeline-marker absolute -left-6 top-6 flex h-6 w-6 -translate-x-1/2 items-center justify-center sm:-left-10"
+            >
+              <div
+                class="timeline-dot h-3 w-3 rounded-full transition-all duration-300"
+                [ngClass]="{
+                  'bg-electric-cyan shadow-[0_0_12px_#00f1fe] scale-125': hoveredIndex() === $index,
+                  'bg-matrix-green shadow-[0_0_8px_#00ff41]': hoveredIndex() !== $index
+                }"
+              ></div>
+              <!-- Outer pulse visible on hover -->
+              @if (hoveredIndex() === $index) {
+                <div class="timeline-pulse absolute h-6 w-6 rounded-full border border-electric-cyan/40 animate-ping"></div>
+              }
+            </div>
+
+            <!-- Card Content -->
+            <article
+              class="timeline-card glass-panel hover-border-glow p-6 sm:p-8"
+              [class.timeline-card-active]="hoveredIndex() === $index"
+            >
+              <!-- Meta Row (Period & Location) -->
+              <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/5 pb-4">
+                <span class="timeline-period text-xs font-semibold font-mono tracking-wider text-electric-cyan">
+                  // {{ item.period }} <span class="text-text-muted">({{ item.duration }})</span>
+                </span>
+                <span class="timeline-location text-xs font-mono text-text-muted flex items-center gap-1.5">
+                  <span class="h-1.5 w-1.5 bg-matrix-green/80 rounded-full"></span>
+                  {{ item.location }}
+                </span>
+              </div>
+
+              <!-- Main Job Info -->
+              <div class="mt-5">
+                <p class="terminal-label text-matrix-green/90 mb-1">
+                  {{ item.company }}
+                </p>
+                <h3 class="text-2xl font-bold leading-tight text-text-primary">
+                  {{ item.role }}
+                  @if (item.type) {
+                    <span class="text-sm font-normal text-text-muted/70 font-mono ml-2 border border-white/10 px-2 py-0.5 select-none">
+                      {{ item.type }}
+                    </span>
+                  }
+                </h3>
+              </div>
+
+              <!-- Job Details -->
+              <p class="mt-4 text-base leading-7 text-text-primary/88">
+                {{ item.description }}
+              </p>
+
+              <!-- Tags / Signals -->
+              @if (item.tags && item.tags.length > 0) {
+                <div class="mt-5 flex flex-wrap gap-2">
+                  @for (tag of item.tags; track tag) {
+                    <span class="tag-badge text-[10px] font-bold font-mono tracking-wide uppercase px-2 py-1 bg-white/5 text-text-muted border border-white/5">
+                      {{ tag }}
+                    </span>
+                  }
+                </div>
+              }
+
+              <!-- Technology Stack -->
+              <div class="mt-6 border-t border-white/5 pt-5">
+                <p class="terminal-label text-electric-cyan">stack</p>
+                <ul class="mt-3 flex flex-wrap gap-2">
+                  @for (tech of item.stack; track tech) {
+                    <li class="stack-chip text-xs font-semibold font-mono uppercase bg-surface-raised border border-white/10 px-2.5 py-1 text-text-primary">
+                      {{ tech }}
+                    </li>
+                  }
+                </ul>
+              </div>
+            </article>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

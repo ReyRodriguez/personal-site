@@ -18,6 +18,7 @@ export class TopNavComponent {
   protected readonly navItems: readonly NavItem[] = [
     { id: 'root', label: '_root' },
     { id: 'projects', label: '_projects' },
+    { id: 'experience', label: '_experience' },
     { id: 'labs', label: '_labs' },
     { id: 'auth', label: '_auth_lab' },
     { id: 'crud', label: '_crud' },

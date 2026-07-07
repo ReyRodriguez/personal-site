@@ -1,0 +1,68 @@
+[
+  {
+    "company": "FUNDACIÓN SALWARE",
+    "role": "Desarrollador full stack",
+    "type": "Jornada completa",
+    "period": "mar. 2023 - actualidad",
+    "duration": "3 años 5 meses",
+    "location": "Madrid, Comunidad de Madrid, España (En remoto)",
+    "tags": ["Fullstack", "Infraestructura IA", "Angular"],
+    "description": "Rediseño UX/UI, modernización de componentes Angular y coordinación con APIs Java Spring Boot para servicios con IA.",
+    "stack": ["Angular", "TypeScript", "SCSS", "Node.js", "Java", "Spring Boot"]
+  },
+  {
+    "company": "MO Technologies",
+    "role": "Front-End Engineer",
+    "type": "Jornada completa",
+    "period": "ene. 2022 - jun. 2022",
+    "duration": "6 meses",
+    "location": "Bogotá, Distrito Capital, Colombia",
+    "tags": ["Frontend", "Fintech", "UX"],
+    "description": "Implementación de formularios de registro multipaso para evaluación de perfil y decisión de crédito.",
+    "stack": ["Angular", "TypeScript", "GraphQL", "NgRx", "AWS"]
+  },
+  {
+    "company": "Granada software",
+    "role": "Desarrollador de front-end",
+    "type": "Contrato temporal",
+    "period": "ago. 2019 - sept. 2021",
+    "duration": "2 años 2 meses",
+    "location": "Medellín, Antioquia, Colombia",
+    "tags": ["Frontend", "GraphQL", "Performance"],
+    "description": "Encargado de Desarrollar soluciones para el frontend de una aplicación de gestión de vehículos de carga programando componentes consumibles en toda la aplicación usando Angular 8. Migración de flujos críticos a GraphQL obteniendo una reducción del 25% en tiempos de espera al optimizar peticiones y consolidar estado con NgRx.",
+    "stack": ["Angular", "GraphQL", "NgRx", "AWS", "Node.js"]
+  },
+  {
+    "company": "Autónomo",
+    "role": "Desarrollador web",
+    "type": "Freelance",
+    "period": "ene. 2018 - dic. 2019",
+    "duration": "2 años",
+    "location": "Barquisimeto, Venezuela",
+    "tags": ["Autónomo", "Freelance", "Web Dev"],
+    "description": "Creación de sitios web responsivos y sistemas web a la medida de clientes locales, aplicando optimización SEO y layouts dinámicos.",
+    "stack": ["HTML5", "CSS3", "JavaScript", "PHP", "WordPress"]
+  },
+  {
+    "company": "Marcovich Solutions",
+    "role": "Desarrollador de aplicaciones web",
+    "type": "Jornada completa",
+    "period": "jul. 2017 - dic. 2017",
+    "duration": "6 meses",
+    "location": "Barquisimeto, Venezuela",
+    "tags": ["Web Apps", "Backend", "Fullstack"],
+    "description": "Desarrollo e implementación de aplicaciones web a la medida utilizando frameworks modernos y bases de datos relacionales.",
+    "stack": ["JavaScript", "Node.js", "Laravel", "MySQL", "CSS"]
+  },
+  {
+    "company": "Dotworkers",
+    "role": "Desarrollador de aplicaciones web",
+    "type": "Jornada completa",
+    "period": "jun. 2015 - dic. 2015",
+    "duration": "7 meses",
+    "location": "Barquisimeto, Venezuela",
+    "tags": ["Web Apps", "Soporte", "Mantenimiento"],
+    "description": "Programación y maquetación de interfaces web, soporte técnico y mantenimiento de sistemas existentes.",
+    "stack": ["HTML", "CSS", "JavaScript", "PHP", "MySQL"]
+  }
+]

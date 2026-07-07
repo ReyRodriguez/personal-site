@@ -1,0 +1,73 @@
+:host {
+  display: block;
+}
+
+.experience-shell {
+  position: relative;
+  background:
+    radial-gradient(
+      circle at 82% 18%,
+      rgb(116 29 255 / 0.08),
+      transparent 32rem
+    ),
+    radial-gradient(circle at 12% 82%, rgb(0 241 254 / 0.06), transparent 28rem);
+}
+
+.timeline-container {
+  /* Relative boundary for vertical rail */
+}
+
+.timeline-line {
+  /* Line running down the timeline items */
+  border-style: dashed;
+}
+
+.timeline-item {
+  transition: transform 300ms ease;
+}
+
+.timeline-card {
+  border-radius: 0 !important; /* Force sharp corner design rule */
+  transition:
+    border-color 300ms ease,
+    box-shadow 300ms ease,
+    background-color 300ms ease,
+    transform 300ms ease;
+  transform: translate3d(0, 0, 0);
+}
+
+.timeline-card-active {
+  border-color: rgb(0 241 254 / 0.5) !important;
+  box-shadow: 0 0 24px rgb(0 241 254 / 0.12);
+  background-color: rgb(25 25 28 / 0.8) !important;
+  transform: translate3d(8px, 0, 0);
+}
+
+.timeline-dot {
+  /* Timeline node */
+}
+
+.stack-chip {
+  border-radius: 0 !important; /* Force sharp corner design rule */
+  background: #1b1b1f;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease,
+    border-color 200ms ease;
+
+  &:hover {
+    background-color: var(--color-cyan);
+    color: #001114;
+    border-color: var(--color-cyan);
+  }
+}
+
+.tag-badge {
+  border-radius: 0 !important;
+}
+
+@media (max-width: 640px) {
+  .timeline-card-active {
+    transform: none; /* Disable transform on mobile to avoid horizontal scroll */
+  }
+}

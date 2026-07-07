@@ -8,6 +8,7 @@ import { HeroSectionComponent } from './features/home/hero-section/hero-section.
 import { LogsSectionComponent } from './features/home/logs-section/logs-section.component';
 import { ProjectsSectionComponent } from './features/home/projects-section/projects-section.component';
 import { SystemsBlueprintSectionComponent } from './features/home/systems-blueprint-section/systems-blueprint-section.component';
+import { ExperienceSectionComponent } from './features/home/experience-section/experience-section.component';
 import { HackyBackgroundComponent } from './shared/hacky-background/hacky-background.component';
 import { SiteFooterComponent } from './shared/site-footer/site-footer.component';
 import { TopNavComponent } from './shared/top-nav/top-nav.component';
@@ -19,6 +20,7 @@ import { TopNavComponent } from './shared/top-nav/top-nav.component';
     HeroSectionComponent,
     AiFluxSectionComponent,
     ProjectsSectionComponent,
+    ExperienceSectionComponent,
     CapabilityMatrixSectionComponent,
     AuthLabSectionComponent,
     CrudLabSectionComponent,
