@@ -422,3 +422,60 @@ textarea {
     transform: none !important;
   }
 }
+
+/* -------------------------------------------------------------------------
+   Route transitions (View Transitions API via withViewTransitions()).
+   The persistent chrome (nav, footer, background) is named so it stays put;
+   only the routed <main> content fades + slides between pages.
+   ------------------------------------------------------------------------- */
+app-top-nav {
+  view-transition-name: nav;
+}
+app-site-footer {
+  view-transition-name: footer;
+}
+app-hacky-background {
+  view-transition-name: bg;
+}
+main {
+  view-transition-name: page;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(nav),
+  ::view-transition-new(nav),
+  ::view-transition-old(footer),
+  ::view-transition-new(footer),
+  ::view-transition-old(bg),
+  ::view-transition-new(bg) {
+    animation: none;
+  }
+
+  ::view-transition-old(page) {
+    animation: vt-page-out 220ms cubic-bezier(0.4, 0, 1, 1) both;
+  }
+  ::view-transition-new(page) {
+    animation: vt-page-in 340ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes vt-page-out {
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+@keyframes vt-page-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

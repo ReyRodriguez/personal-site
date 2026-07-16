@@ -1,21 +1,74 @@
-<footer class="site-footer px-5 py-14 sm:px-8 lg:px-20">
-  <div
-    class="mx-auto flex w-full max-w-[var(--layout-max)] flex-col items-center justify-between gap-6 md:flex-row"
-  >
-    <div class="flex flex-col items-center gap-1.5 md:items-start">
-      <span class="footer-brand">REYDERSON RODRIGUEZ</span>
-      <p class="footer-tagline">© {{ year }} · {{ t().tagline }}</p>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <a class="footer-logo" routerLink="/" aria-label="Reyderson Rodriguez">
+          <span class="footer-mark" aria-hidden="true">RR</span>
+          <span class="footer-name">REYDERSON RODRIGUEZ</span>
+        </a>
+        <p class="footer-tagline">{{ t().tagline }}</p>
+        <p class="footer-status">
+          <span class="status-pip" aria-hidden="true"></span>
+          {{ t().status }}
+        </p>
+      </div>
+
+      <!-- Navigate -->
+      <nav class="footer-col" [attr.aria-label]="t().navHeading">
+        <p class="footer-heading">{{ t().navHeading }}</p>
+        <ul>
+          @for (link of t().nav; track link.path) {
+            <li>
+              <a
+                class="footer-link"
+                [routerLink]="link.path"
+                routerLinkActive="footer-link-active"
+                [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+                >{{ link.label }}</a
+              >
+            </li>
+          }
+        </ul>
+      </nav>
+
+      <!-- Connect -->
+      <nav class="footer-col" [attr.aria-label]="t().connectHeading">
+        <p class="footer-heading">{{ t().connectHeading }}</p>
+        <ul>
+          @for (item of social; track item.label) {
+            <li>
+              <a
+                class="footer-link"
+                [href]="item.href"
+                [attr.target]="item.external ? '_blank' : null"
+                [attr.rel]="item.external ? 'noreferrer' : null"
+                >{{ item.label }}<span class="link-slash" aria-hidden="true"
+                  >↗</span
+                ></a
+              >
+            </li>
+          }
+        </ul>
+      </nav>
+
+      <!-- Colophon -->
+      <div class="footer-col">
+        <p class="footer-heading">{{ t().colophonHeading }}</p>
+        <p class="footer-colophon">{{ t().colophon }}</p>
+        <button type="button" class="footer-top" (click)="scrollTop()">
+          <span aria-hidden="true">↑</span> {{ t().top }}
+        </button>
+      </div>
     </div>
-    <div class="flex flex-wrap justify-center gap-8">
-      <a class="footer-link" href="mailto:r.reydev@gmail.com">Email</a>
-      <a
-        class="footer-link"
-        href="https://www.linkedin.com/in/reydersonrodriguez/"
-        target="_blank"
-        rel="noreferrer"
-        >LinkedIn</a
-      >
-      <a class="footer-link" href="#auth">{{ t().terminal }}</a>
+
+    <div class="footer-bar">
+      <p class="footer-copy">© {{ year }} Reyderson Rodriguez · {{ t().rights }}</p>
+      <p class="footer-sig" aria-hidden="true">
+        <span class="sig-prompt">~/portfolio</span>
+        <span class="sig-symbol">❯</span>
+        <span class="sig-cursor"></span>
+      </p>
     </div>
   </div>
 </footer>

@@ -1,0 +1,30 @@
+<section class="role-shell frontend-shell section-shell scroll-mt-28">
+  <div class="section-inner">
+    <app-section-header
+      index="F1"
+      [kicker]="t().kicker"
+      [title]="t().title"
+      [lede]="t().lede"
+    />
+
+    <div class="role-grid">
+      @for (area of focusAreas; track area.id; let i = $index) {
+        <article
+          class="role-card glass-panel hover-border-glow"
+          appReveal
+          [revealDelay]="i * 80"
+        >
+          <span class="terminal-label role-eyebrow" aria-hidden="true">
+            {{ area.id }} · {{ area.label[locale()] }}
+          </span>
+          <h3 class="role-title">{{ area.title[locale()] }}</h3>
+          <p class="role-desc">{{ area.description[locale()] }}</p>
+        </article>
+      }
+    </div>
+
+    <p class="role-soon terminal-label" appReveal [revealDelay]="focusAreas.length * 80">
+      {{ t().soon }}
+    </p>
+  </div>
+</section>

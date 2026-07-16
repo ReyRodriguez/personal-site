@@ -5,8 +5,7 @@
   >
     <a
       class="brand shrink-0"
-      href="#root"
-      (click)="activate('root')"
+      routerLink="/"
       aria-label="Reyderson Rodriguez — inicio"
     >
       <span class="brand-mark" aria-hidden="true">RR</span>
@@ -16,12 +15,12 @@
     <div
       class="nav-links flex min-w-0 flex-1 justify-center gap-1 overflow-x-auto"
     >
-      @for (item of navItems; track item.id) {
+      @for (item of navItems; track item.path) {
         <a
           class="nav-link"
-          [class.nav-link-active]="activeSection() === item.id"
-          [href]="'#' + item.id"
-          (click)="activate(item.id)"
+          [routerLink]="item.path"
+          routerLinkActive="nav-link-active"
+          [routerLinkActiveOptions]="{ exact: item.exact }"
         >
           <span class="nav-slash" aria-hidden="true">/</span>{{ item.label }}
         </a>

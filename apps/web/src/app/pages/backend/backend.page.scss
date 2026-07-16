@@ -1,0 +1,60 @@
+:host {
+  display: block;
+}
+
+.role-shell {
+  min-height: 100vh;
+}
+
+.backend-shell {
+  background:
+    radial-gradient(circle at 14% 12%, rgb(116 29 255 / 0.08), transparent 28rem),
+    radial-gradient(circle at 88% 84%, rgb(0 241 254 / 0.05), transparent 30rem);
+}
+
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.role-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 1.5rem;
+  border-color: rgb(255 255 255 / 0.14);
+}
+
+.role-eyebrow {
+  color: var(--color-cyan);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+}
+
+.role-title {
+  margin-top: 0.9rem;
+  color: var(--color-text);
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.role-desc {
+  margin-top: 0.5rem;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.role-soon {
+  margin-top: 2rem;
+  color: rgb(185 204 178 / 0.55);
+  font-size: 0.75rem;
+}
+
+@media (min-width: 680px) {
+  .role-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

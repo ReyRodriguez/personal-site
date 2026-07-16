@@ -3,37 +3,219 @@
 }
 
 .site-footer {
+  position: relative;
   border-top: 1px solid rgb(59 75 55 / 0.4);
-  background: #0e0e10;
+  background:
+    radial-gradient(circle at 12% 0%, rgb(0 255 65 / 0.05), transparent 22rem),
+    radial-gradient(circle at 88% 120%, rgb(116 29 255 / 0.07), transparent 26rem),
+    #0b0b0d;
 }
 
-.footer-brand {
+.footer-inner {
+  margin-inline: auto;
+  width: 100%;
+  max-width: var(--layout-max);
+  padding: clamp(3rem, 6vw, 4.5rem) 1.25rem 2rem;
+}
+
+@media (min-width: 640px) {
+  .footer-inner {
+    padding-inline: 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  .footer-inner {
+    padding-inline: 5rem;
+  }
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem 2rem;
+}
+
+@media (min-width: 560px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 960px) {
+  .footer-grid {
+    grid-template-columns: 2fr 1fr 1fr 1.2fr;
+  }
+}
+
+/* Brand */
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+}
+
+.footer-mark {
+  display: grid;
+  place-items: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  border: 1px solid rgb(0 255 65 / 0.55);
+  color: var(--color-green);
+  font-size: 0.74rem;
   font-weight: 800;
-  letter-spacing: 0.18em;
+  box-shadow: inset 0 0 12px rgb(0 255 65 / 0.12);
+}
+
+.footer-name {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
   color: var(--color-text);
 }
 
 .footer-tagline {
-  margin: 0;
-  color: rgb(185 204 178 / 0.62);
-  font-size: 0.8rem;
-  letter-spacing: 0.01em;
+  margin: 1.1rem 0 0;
+  max-width: 40ch;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.footer-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1.1rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--color-green-soft);
+}
+
+.status-pip {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--color-green);
+  box-shadow: 0 0 10px rgb(0 255 65 / 0.8);
+  animation: pulse-glow 2.4s ease-in-out infinite;
+}
+
+/* Columns */
+.footer-heading {
+  margin: 0 0 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-cyan);
+}
+
+.footer-col ul {
+  display: grid;
+  gap: 0.7rem;
 }
 
 .footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
   color: var(--color-muted);
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  font-size: 0.9rem;
   transition:
     color 180ms ease,
-    text-shadow 180ms ease;
+    transform 180ms ease;
 }
 
 .footer-link:hover {
+  color: var(--color-text);
+  transform: translateX(3px);
+}
+
+.footer-link-active {
+  color: var(--color-green-soft);
+}
+
+.link-slash {
+  font-size: 0.7rem;
+  color: rgb(0 241 254 / 0.6);
+}
+
+.footer-colophon {
+  margin: 0;
+  max-width: 26ch;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  line-height: 1.7;
+  color: rgb(185 204 178 / 0.62);
+}
+
+.footer-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1.2rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
   color: var(--color-cyan);
-  text-shadow: 0 0 18px rgb(0 241 254 / 0.35);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: text-shadow 180ms ease;
+}
+
+.footer-top:hover {
+  text-shadow: 0 0 14px rgb(0 241 254 / 0.4);
+}
+
+/* Bottom bar */
+.footer-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid rgb(255 255 255 / 0.08);
+}
+
+.footer-copy {
+  margin: 0;
+  color: rgb(185 204 178 / 0.55);
+  font-size: 0.78rem;
+}
+
+.footer-sig {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--color-green-soft);
+}
+
+.sig-symbol {
+  color: rgb(255 189 46 / 0.9);
+}
+
+.sig-cursor {
+  width: 0.5rem;
+  height: 1em;
+  background: var(--color-green);
+  box-shadow: 0 0 10px rgb(114 255 112 / 0.7);
+  animation: cursorBlink 900ms steps(1) infinite;
+}
+
+@keyframes cursorBlink {
+  50% {
+    opacity: 0;
+  }
 }
