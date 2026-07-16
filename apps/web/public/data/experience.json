@@ -1,68 +1,128 @@
 [
   {
-    "company": "FUNDACIÓN SALWARE",
-    "role": "Desarrollador full stack",
-    "type": "Jornada completa",
-    "period": "mar. 2023 - actualidad",
-    "duration": "3 años 5 meses",
-    "location": "Madrid, Comunidad de Madrid, España (En remoto)",
-    "tags": ["Fullstack", "Infraestructura IA", "Angular"],
-    "description": "Rediseño UX/UI, modernización de componentes Angular y coordinación con APIs Java Spring Boot para servicios con IA.",
+    "company": "Fundación Salware",
+    "role": { "es": "Desarrollador Full Stack", "en": "Full Stack Developer" },
+    "type": { "es": "Jornada completa", "en": "Full-time" },
+    "period": { "es": "mar. 2023 — actualidad", "en": "Mar 2023 — Present" },
+    "duration": { "es": "3 años 5 meses", "en": "3 yrs 5 mos" },
+    "location": {
+      "es": "Madrid, España · Remoto",
+      "en": "Madrid, Spain · Remote"
+    },
+    "tags": {
+      "es": ["Fullstack", "Infraestructura IA", "Angular"],
+      "en": ["Fullstack", "AI infrastructure", "Angular"]
+    },
+    "description": {
+      "es": "Rediseño UX/UI, modernización de componentes Angular y coordinación con APIs Java Spring Boot para servicios con IA.",
+      "en": "UX/UI redesign, modernization of Angular components and coordination with Java Spring Boot APIs for AI-powered services."
+    },
     "stack": ["Angular", "TypeScript", "SCSS", "Node.js", "Java", "Spring Boot"]
   },
   {
     "company": "MO Technologies",
-    "role": "Front-End Engineer",
-    "type": "Jornada completa",
-    "period": "ene. 2022 - jun. 2022",
-    "duration": "6 meses",
-    "location": "Bogotá, Distrito Capital, Colombia",
-    "tags": ["Frontend", "Fintech", "UX"],
-    "description": "Implementación de formularios de registro multipaso para evaluación de perfil y decisión de crédito.",
+    "role": { "es": "Front-End Engineer", "en": "Front-End Engineer" },
+    "type": { "es": "Jornada completa", "en": "Full-time" },
+    "period": { "es": "ene. 2022 — jun. 2022", "en": "Jan 2022 — Jun 2022" },
+    "duration": { "es": "6 meses", "en": "6 mos" },
+    "location": {
+      "es": "Bogotá, Colombia",
+      "en": "Bogotá, Colombia"
+    },
+    "tags": {
+      "es": ["Frontend", "Fintech", "UX"],
+      "en": ["Frontend", "Fintech", "UX"]
+    },
+    "description": {
+      "es": "Implementación de formularios de registro multipaso para evaluación de perfil y decisión de crédito.",
+      "en": "Built multi-step registration forms for profile assessment and credit decisions."
+    },
     "stack": ["Angular", "TypeScript", "GraphQL", "NgRx", "AWS"]
   },
   {
-    "company": "Granada software",
-    "role": "Desarrollador de front-end",
-    "type": "Contrato temporal",
-    "period": "ago. 2019 - sept. 2021",
-    "duration": "2 años 2 meses",
-    "location": "Medellín, Antioquia, Colombia",
-    "tags": ["Frontend", "GraphQL", "Performance"],
-    "description": "Encargado de Desarrollar soluciones para el frontend de una aplicación de gestión de vehículos de carga programando componentes consumibles en toda la aplicación usando Angular 8. Migración de flujos críticos a GraphQL obteniendo una reducción del 25% en tiempos de espera al optimizar peticiones y consolidar estado con NgRx.",
+    "company": "Granada Software",
+    "role": { "es": "Desarrollador Front-End", "en": "Front-End Developer" },
+    "type": { "es": "Contrato temporal", "en": "Contract" },
+    "period": { "es": "ago. 2019 — sept. 2021", "en": "Aug 2019 — Sep 2021" },
+    "duration": { "es": "2 años 2 meses", "en": "2 yrs 2 mos" },
+    "location": {
+      "es": "Medellín, Colombia",
+      "en": "Medellín, Colombia"
+    },
+    "tags": {
+      "es": ["Frontend", "GraphQL", "Performance"],
+      "en": ["Frontend", "GraphQL", "Performance"]
+    },
+    "description": {
+      "es": "Desarrollo del frontend de una plataforma de gestión de vehículos de carga con componentes reutilizables en Angular 8. Migración de flujos críticos a GraphQL con una reducción del 25% en tiempos de espera optimizando peticiones y consolidando estado con NgRx.",
+      "en": "Built the frontend of a freight-vehicle management platform with reusable Angular 8 components. Migrated critical flows to GraphQL, cutting wait times by 25% by optimizing requests and consolidating state with NgRx."
+    },
     "stack": ["Angular", "GraphQL", "NgRx", "AWS", "Node.js"]
   },
   {
-    "company": "Autónomo",
-    "role": "Desarrollador web",
-    "type": "Freelance",
-    "period": "ene. 2018 - dic. 2019",
-    "duration": "2 años",
-    "location": "Barquisimeto, Venezuela",
-    "tags": ["Autónomo", "Freelance", "Web Dev"],
-    "description": "Creación de sitios web responsivos y sistemas web a la medida de clientes locales, aplicando optimización SEO y layouts dinámicos.",
+    "company": "Freelance",
+    "role": { "es": "Desarrollador Web", "en": "Web Developer" },
+    "type": { "es": "Autónomo", "en": "Self-employed" },
+    "period": { "es": "ene. 2018 — dic. 2019", "en": "Jan 2018 — Dec 2019" },
+    "duration": { "es": "2 años", "en": "2 yrs" },
+    "location": {
+      "es": "Barquisimeto, Venezuela",
+      "en": "Barquisimeto, Venezuela"
+    },
+    "tags": {
+      "es": ["Autónomo", "Freelance", "Web"],
+      "en": ["Self-employed", "Freelance", "Web"]
+    },
+    "description": {
+      "es": "Creación de sitios web responsivos y sistemas a la medida para clientes locales, aplicando optimización SEO y layouts dinámicos.",
+      "en": "Built responsive websites and custom systems for local clients, applying SEO optimization and dynamic layouts."
+    },
     "stack": ["HTML5", "CSS3", "JavaScript", "PHP", "WordPress"]
   },
   {
     "company": "Marcovich Solutions",
-    "role": "Desarrollador de aplicaciones web",
-    "type": "Jornada completa",
-    "period": "jul. 2017 - dic. 2017",
-    "duration": "6 meses",
-    "location": "Barquisimeto, Venezuela",
-    "tags": ["Web Apps", "Backend", "Fullstack"],
-    "description": "Desarrollo e implementación de aplicaciones web a la medida utilizando frameworks modernos y bases de datos relacionales.",
+    "role": {
+      "es": "Desarrollador de Aplicaciones Web",
+      "en": "Web Application Developer"
+    },
+    "type": { "es": "Jornada completa", "en": "Full-time" },
+    "period": { "es": "jul. 2017 — dic. 2017", "en": "Jul 2017 — Dec 2017" },
+    "duration": { "es": "6 meses", "en": "6 mos" },
+    "location": {
+      "es": "Barquisimeto, Venezuela",
+      "en": "Barquisimeto, Venezuela"
+    },
+    "tags": {
+      "es": ["Web Apps", "Backend", "Fullstack"],
+      "en": ["Web apps", "Backend", "Fullstack"]
+    },
+    "description": {
+      "es": "Desarrollo e implementación de aplicaciones web a la medida utilizando frameworks modernos y bases de datos relacionales.",
+      "en": "Developed and shipped custom web applications using modern frameworks and relational databases."
+    },
     "stack": ["JavaScript", "Node.js", "Laravel", "MySQL", "CSS"]
   },
   {
     "company": "Dotworkers",
-    "role": "Desarrollador de aplicaciones web",
-    "type": "Jornada completa",
-    "period": "jun. 2015 - dic. 2015",
-    "duration": "7 meses",
-    "location": "Barquisimeto, Venezuela",
-    "tags": ["Web Apps", "Soporte", "Mantenimiento"],
-    "description": "Programación y maquetación de interfaces web, soporte técnico y mantenimiento de sistemas existentes.",
+    "role": {
+      "es": "Desarrollador de Aplicaciones Web",
+      "en": "Web Application Developer"
+    },
+    "type": { "es": "Jornada completa", "en": "Full-time" },
+    "period": { "es": "jun. 2015 — dic. 2015", "en": "Jun 2015 — Dec 2015" },
+    "duration": { "es": "7 meses", "en": "7 mos" },
+    "location": {
+      "es": "Barquisimeto, Venezuela",
+      "en": "Barquisimeto, Venezuela"
+    },
+    "tags": {
+      "es": ["Web Apps", "Soporte", "Mantenimiento"],
+      "en": ["Web apps", "Support", "Maintenance"]
+    },
+    "description": {
+      "es": "Programación y maquetación de interfaces web, soporte técnico y mantenimiento de sistemas existentes.",
+      "en": "Coded and laid out web interfaces, provided technical support and maintained existing systems."
+    },
     "stack": ["HTML", "CSS", "JavaScript", "PHP", "MySQL"]
   }
 ]

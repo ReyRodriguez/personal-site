@@ -1,0 +1,14 @@
+<div class="section-head">
+  <p class="section-kicker">
+    <span class="section-index" aria-hidden="true">{{ index() }}</span>
+    <span class="section-rule" aria-hidden="true"></span>
+    {{ kicker() }}
+  </p>
+
+  <div class="section-head-body">
+    <h2 class="section-title">{{ title() }}</h2>
+    @if (lede()) {
+      <p class="section-lede">{{ lede() }}</p>
+    }
+  </div>
+</div>

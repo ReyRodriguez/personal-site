@@ -1,27 +1,12 @@
-<section
-  id="experience"
-  class="experience-shell scroll-mt-28 px-5 py-24 sm:px-8 lg:px-20"
->
-  <div class="mx-auto w-full max-w-[var(--layout-max)]">
-    <!-- Section Header -->
-    <div class="mb-16 grid gap-5 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
-      <div>
-        <p class="terminal-label text-electric-cyan">
-          HISTORY.LOG / WORK_RECORD
-        </p>
-        <h2
-          class="mt-5 text-4xl font-semibold leading-tight text-text-primary sm:text-5xl"
-        >
-          EXPERIENCIA LABORAL
-        </h2>
-      </div>
-      <p
-        class="max-w-3xl text-base leading-8 text-text-muted lg:justify-self-end"
-      >
-        Línea temporal de mi trayectoria en desarrollo de software, desde mis
-        inicios hasta roles de nivel senior e integraciones avanzadas con IA.
-      </p>
-    </div>
+<section id="experience" class="experience-shell section-shell scroll-mt-28">
+  <div class="section-inner">
+    <app-section-header
+      appReveal
+      index="03"
+      kicker="CAREER.LOG"
+      [title]="header().title"
+      [lede]="header().lede"
+    />
 
     <!-- Timeline Body -->
     <div class="timeline-container relative pl-6 sm:pl-10">
@@ -33,6 +18,8 @@
         @for (item of experiences(); track $index; let last = $last) {
           <div
             class="timeline-item relative"
+            appReveal
+            [revealDelay]="$index * 70"
             (mouseenter)="setHovered($index)"
             (mouseleave)="setHovered(null)"
           >
@@ -89,25 +76,12 @@
                 {{ item.description }}
               </p>
 
-              <!-- Tags / Signals -->
-              @if (item.tags && item.tags.length > 0) {
-                <div class="mt-5 flex flex-wrap gap-2">
-                  @for (tag of item.tags; track tag) {
-                    <span class="tag-badge text-[10px] font-bold font-mono tracking-wide uppercase px-2 py-1 bg-white/5 text-text-muted border border-white/5">
-                      {{ tag }}
-                    </span>
-                  }
-                </div>
-              }
-
               <!-- Technology Stack -->
               <div class="mt-6 border-t border-white/5 pt-5">
                 <p class="terminal-label text-electric-cyan">stack</p>
                 <ul class="mt-3 flex flex-wrap gap-2">
                   @for (tech of item.stack; track tech) {
-                    <li class="stack-chip text-xs font-semibold font-mono uppercase bg-surface-raised border border-white/10 px-2.5 py-1 text-text-primary">
-                      {{ tech }}
-                    </li>
+                    <li class="chip">{{ tech }}</li>
                   }
                 </ul>
               </div>

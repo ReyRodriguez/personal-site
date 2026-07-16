@@ -2,10 +2,6 @@
   display: block;
 }
 
-.flux-shell {
-  position: relative;
-}
-
 .pipeline-line {
   position: absolute;
   top: 50%;
@@ -35,7 +31,7 @@
   place-items: center;
   border-radius: 999px;
   color: rgb(185 204 178 / 0.68);
-  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-family: var(--font-mono);
   font-size: 0.95rem;
   font-weight: 900;
 }
@@ -54,4 +50,9 @@
 
 .flux-node:hover .flux-icon {
   color: var(--color-green-soft);
+}
+
+.flux-summary {
+  font-family: var(--font-mono);
+  color: rgb(185 204 178 / 0.6);
 }

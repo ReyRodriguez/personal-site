@@ -96,61 +96,80 @@
   background: #28c840;
 }
 
-.pipboy-screen {
+.terminal-screen {
   position: relative;
   z-index: 3;
   display: grid;
-  min-height: 23.2rem;
   grid-template-rows: auto 1fr auto;
-  padding: 1.1rem 1.25rem 1rem;
+  min-height: 23.2rem;
+  padding: 1rem 1.35rem 0.9rem;
   color: #72ff70;
   text-shadow:
-    0 0 4px rgb(0 255 65 / 0.65),
-    0 0 14px rgb(0 255 65 / 0.28);
+    0 0 4px rgb(0 255 65 / 0.55),
+    0 0 14px rgb(0 255 65 / 0.24);
 }
 
-.pipboy-hud,
-.pipboy-footer {
+/* MOTD greeting line at the top of the screen. */
+.terminal-motd {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  border-color: rgb(114 255 112 / 0.5);
-  color: rgb(114 255 112 / 0.82);
-  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
-  font-size: 0.68rem;
-  font-weight: 900;
-  letter-spacing: 0.08em;
+  gap: 0.55rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid rgb(114 255 112 / 0.12);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: rgb(114 255 112 / 0.5);
 }
 
-.pipboy-hud {
-  border-top: 2px solid;
-  border-left: 2px solid;
-  border-right: 2px solid;
-  padding: 0.45rem 0.65rem 0.55rem;
-}
-
-.pipboy-footer {
-  border-bottom: 2px solid;
-  padding: 0.55rem 0.65rem 0.35rem;
-}
-
-.pipboy-footer .active {
-  border: 1px solid rgb(114 255 112 / 0.85);
-  padding: 0.2rem 0.45rem;
+.motd-pip {
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background: #72ff70;
+  box-shadow: 0 0 8px rgb(114 255 112 / 0.85);
+  animation: cursorBlink 2.2s steps(1) infinite;
 }
 
 .zsh-output {
   display: flex;
   min-height: 0;
   flex-direction: column;
-  justify-content: flex-end;
-  gap: 0.34rem;
+  justify-content: flex-start;
+  gap: 0.4rem;
   overflow: hidden;
-  padding: 1rem 0.2rem;
-  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  padding: 0.85rem 0.15rem;
+  font-family: var(--font-mono);
   font-size: 0.82rem;
-  line-height: 1.45;
+  line-height: 1.5;
+}
+
+/* tmux/powerline-style status bar at the foot of the screen. */
+.terminal-status {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid rgb(114 255 112 / 0.12);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.07em;
+  text-shadow: none;
+}
+
+.stat-seg {
+  padding: 0.12rem 0.42rem;
+  color: rgb(114 255 112 / 0.5);
+}
+
+.stat-branch {
+  color: #86ffa0;
+  background: rgb(0 255 65 / 0.14);
+  border: 1px solid rgb(0 255 65 / 0.28);
+}
+
+.stat-fill {
+  flex: 1;
 }
 
 .zsh-row {
@@ -160,7 +179,7 @@
 
 .zsh-prompt {
   color: #72ff70;
-  font-weight: 900;
+  font-weight: 800;
 }
 
 .zsh-path {
@@ -190,40 +209,68 @@
   }
 }
 
+.hero-name {
+  letter-spacing: -0.035em;
+}
+
+.hero-role {
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+}
+
+.hero-role-tag {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.hero-role-dot {
+  color: rgb(0 241 254 / 0.6);
+}
+
 .hero-action {
   display: inline-flex;
   min-height: 3.25rem;
   align-items: center;
   justify-content: center;
-  padding: 0 1.35rem;
-  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
-  font-size: 0.75rem;
+  padding: 0 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .metric-cell + .metric-cell {
   border-top: 1px solid var(--color-line);
 }
 
-.tech-chip {
-  border: 1px solid rgb(255 255 255 / 0.1);
-  padding: 0.45rem 0.7rem;
-  color: var(--color-text);
-  background: rgb(42 42 44 / 0.72);
-  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
-  font-size: 0.75rem;
-  transition:
-    border-color 200ms ease,
-    color 200ms ease,
-    background-color 200ms ease;
+/* Tech chips with a leading monochrome glyph. */
+.chip-tech {
+  gap: 0.42rem;
 }
 
-.tech-chip:hover {
-  border-color: rgb(0 241 254 / 0.45);
+.chip-ic {
+  display: inline-flex;
+  color: rgb(229 225 228 / 0.82);
+  transition: color 200ms ease;
+}
+
+.chip-ic ::ng-deep svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  display: block;
+}
+
+.chip-tech:hover .chip-ic {
   color: var(--color-cyan);
-  background: rgb(0 241 254 / 0.07);
+}
+
+.chip-tech-muted {
+  opacity: 0.82;
+}
+
+.chip-tech-muted .chip-ic {
+  color: rgb(185 204 178 / 0.7);
 }
 
 @media (min-width: 640px) {

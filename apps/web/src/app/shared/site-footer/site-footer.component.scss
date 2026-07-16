@@ -7,21 +7,33 @@
   background: #0e0e10;
 }
 
+.footer-brand {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: var(--color-text);
+}
+
+.footer-tagline {
+  margin: 0;
+  color: rgb(185 204 178 / 0.62);
+  font-size: 0.8rem;
+  letter-spacing: 0.01em;
+}
+
 .footer-link {
   color: var(--color-muted);
-  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   transition:
     color 180ms ease,
-    text-shadow 180ms ease,
-    transform 180ms ease;
+    text-shadow 180ms ease;
 }
 
 .footer-link:hover {
   color: var(--color-cyan);
   text-shadow: 0 0 18px rgb(0 241 254 / 0.35);
-  transform: skewX(-5deg);
 }

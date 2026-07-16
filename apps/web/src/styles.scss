@@ -22,6 +22,10 @@
   --color-green-soft: #72ff70;
   --color-purple: #741dff;
   --layout-max: 1440px;
+  --font-sans: 'Geist Variable', Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono Variable', 'SFMono-Regular', Consolas,
+    'Liberation Mono', monospace;
+  --section-gap: clamp(6rem, 12vw, 9.5rem);
 }
 
 * {
@@ -55,8 +59,9 @@ body {
       transparent 34rem
     ),
     linear-gradient(180deg, #030014 0%, #07070d 48%, #030014 100%);
-  font-family: 'Geist Variable', Inter, ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-sans);
   text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
 }
 
 body::before {
@@ -171,6 +176,13 @@ textarea {
       transform 300ms ease;
   }
 
+  /*
+   * A single bright segment travels clockwise around the border while the rest
+   * of the edge keeps its normal neutral colour. The conic-gradient is
+   * transparent for most of the circle and only lit across one arc (a soft
+   * tail fading up to a sharp, bright leading head); rotating --border-angle
+   * carries that arc around the perimeter.
+   */
   .hover-border-glow::before {
     content: '';
     position: absolute;
@@ -179,34 +191,34 @@ textarea {
     padding: 1px;
     background: conic-gradient(
       from var(--border-angle),
-      var(--color-cyan) 0%,
-      var(--color-purple) 25%,
-      var(--color-green) 50%,
-      var(--color-purple) 75%,
-      var(--color-cyan) 100%
+      transparent 0deg 250deg,
+      rgb(0 241 254 / 0) 250deg,
+      rgb(0 241 254 / 0.85) 315deg,
+      rgb(114 255 112 / 1) 342deg,
+      rgb(116 29 255 / 0.95) 353deg,
+      transparent 360deg
     );
-    -webkit-mask: 
-      linear-gradient(#fff 0 0) content-box, 
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
-    mask: 
-      linear-gradient(#fff 0 0) content-box, 
+    mask:
+      linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
     mask-composite: exclude;
     pointer-events: none;
     z-index: 1;
     opacity: 0;
-    transition: opacity 300ms ease;
+    transition: opacity 400ms ease;
   }
 
   .hover-border-glow:hover {
-    border-color: transparent;
-    box-shadow: 0 0 20px rgb(0 241 254 / 0.15);
+    border-color: rgb(255 255 255 / 0.16);
   }
 
   .hover-border-glow:hover::before {
     opacity: 1;
-    animation: rotate-border-angle 3s linear infinite;
+    animation: rotate-border-angle 7s linear infinite;
   }
 
   .btn-glitch {
@@ -272,12 +284,8 @@ textarea {
     backdrop-filter: blur(12px);
   }
 
-  .hud-panel::before {
-    display: none;
-  }
-
   .terminal-label {
-    font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+    font-family: var(--font-mono);
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.08em;
@@ -339,5 +347,78 @@ textarea {
   .terminal-content {
     white-space: pre-wrap;
     animation: terminalScroll 20s linear infinite;
+  }
+
+  /* Canonical section wrapper — one vertical rhythm for the whole page. */
+  .section-shell {
+    position: relative;
+    padding-block: var(--section-gap);
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .section-shell {
+      padding-inline: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-shell {
+      padding-inline: 5rem;
+    }
+  }
+
+  .section-inner {
+    margin-inline: auto;
+    width: 100%;
+    max-width: var(--layout-max);
+  }
+
+  /* Canonical technology chip used across every section. */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.32rem 0.6rem;
+    border: 1px solid rgb(255 255 255 / 0.1);
+    background: rgb(255 255 255 / 0.03);
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition:
+      border-color 200ms ease,
+      color 200ms ease,
+      background-color 200ms ease;
+  }
+
+  .chip:hover {
+    border-color: rgb(0 241 254 / 0.4);
+    color: var(--color-text);
+    background: rgb(0 241 254 / 0.06);
+  }
+}
+
+/* Scroll-reveal entrance — see RevealDirective. */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 620ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-init.is-revealed {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+@media print {
+  .reveal-init {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

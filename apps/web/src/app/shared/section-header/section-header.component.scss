@@ -1,0 +1,67 @@
+:host {
+  display: block;
+  margin-bottom: clamp(2.5rem, 5vw, 3.75rem);
+}
+
+.section-head {
+  max-width: var(--layout-max);
+}
+
+.section-kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin: 0 0 1.5rem;
+  color: var(--color-cyan);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.section-index {
+  color: var(--color-green);
+  font-variant-numeric: tabular-nums;
+}
+
+.section-rule {
+  width: 2.25rem;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-green), transparent);
+}
+
+.section-head-body {
+  display: grid;
+  align-items: end;
+  gap: 1rem 3rem;
+}
+
+.section-title {
+  margin: 0;
+  max-width: 22ch;
+  font-size: clamp(2rem, 4.4vw, 3.25rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--color-text);
+  text-wrap: balance;
+}
+
+.section-lede {
+  margin: 0;
+  max-width: 46ch;
+  color: var(--color-muted);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+@media (min-width: 900px) {
+  .section-head-body {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  }
+
+  .section-lede {
+    padding-bottom: 0.4rem;
+  }
+}

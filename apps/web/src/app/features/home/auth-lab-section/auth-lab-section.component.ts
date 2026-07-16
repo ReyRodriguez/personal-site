@@ -2,13 +2,54 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  inject,
   signal,
 } from '@angular/core';
+import { LocaleService } from '../../../shared/i18n/locale.service';
+import { RevealDirective } from '../../../shared/reveal/reveal.directive';
+import { SectionHeaderComponent } from '../../../shared/section-header/section-header.component';
 
 interface LoginDraft {
   readonly email: string;
   readonly password: string;
 }
+
+interface AuthCopy {
+  readonly title: string;
+  readonly lede: string;
+  readonly emailLabel: string;
+  readonly passwordLabel: string;
+  readonly emailAria: string;
+  readonly passwordAria: string;
+  readonly issueToken: string;
+  readonly revokeSession: string;
+  readonly credentialsRejected: string;
+}
+
+const CONTENT: Record<'es' | 'en', AuthCopy> = {
+  es: {
+    title: 'Laboratorio JWT',
+    lede: 'Emite un token de demo, inspecciona sus claims y observa cómo los guards validan header, expiración, rol y scope en tiempo real.',
+    emailLabel: 'EMAIL',
+    passwordLabel: 'CONTRASEÑA',
+    emailAria: 'Email para la demo JWT',
+    passwordAria: 'Contraseña para la demo JWT',
+    issueToken: 'Emitir JWT',
+    revokeSession: 'Revocar sesión',
+    credentialsRejected: 'Credenciales rechazadas por la estrategia local.',
+  },
+  en: {
+    title: 'JWT Auth Lab',
+    lede: 'Issue a demo token, inspect its claims and watch the guards validate header, expiry, role and scope in real time.',
+    emailLabel: 'EMAIL',
+    passwordLabel: 'PASSWORD',
+    emailAria: 'Email for the JWT demo',
+    passwordAria: 'Password for the JWT demo',
+    issueToken: 'Issue JWT',
+    revokeSession: 'Revoke session',
+    credentialsRejected: 'Credentials rejected by the local strategy.',
+  },
+};
 
 interface JwtClaims {
   readonly sub: string;
@@ -32,11 +73,14 @@ interface GuardCheck {
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-auth-lab-section',
-  imports: [],
+  imports: [SectionHeaderComponent, RevealDirective],
   templateUrl: './auth-lab-section.component.html',
   styleUrl: './auth-lab-section.component.scss',
 })
 export class AuthLabSectionComponent {
+  private readonly i18n = inject(LocaleService);
+  protected readonly t = computed(() => CONTENT[this.i18n.locale()]);
+
   protected readonly draft = signal<LoginDraft>({
     email: 'recruiter@portfolio.dev',
     password: 'Portfolio2026!',
@@ -108,7 +152,7 @@ export class AuthLabSectionComponent {
       draft.password !== 'Portfolio2026!'
     ) {
       this.session.set(null);
-      this.authError.set('Credenciales rechazadas por la estrategia local.');
+      this.authError.set(this.t().credentialsRejected);
       return;
     }
 

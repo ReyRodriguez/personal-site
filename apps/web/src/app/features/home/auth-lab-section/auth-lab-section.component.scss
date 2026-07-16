@@ -2,54 +2,62 @@
   display: block;
 }
 
-.auth-lab-shell {
-  position: relative;
+.section-shell {
   background:
     radial-gradient(circle at 8% 20%, rgb(0 255 65 / 0.1), transparent 22rem),
     radial-gradient(circle at 84% 38%, rgb(0 241 254 / 0.11), transparent 28rem);
 }
 
-.section-copy {
-  align-self: center;
+.console-column {
+  align-content: start;
 }
 
 .guard-row {
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  border: 1px solid rgb(255 255 255 / 0.1);
+  border: 1px solid rgb(255 255 255 / 0.08);
+  border-radius: 0;
   padding: 0.85rem 1rem;
-  color: rgb(185 204 178 / 0.7);
-  background: rgb(255 255 255 / 0.035);
-  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  background: rgb(255 255 255 / 0.03);
+  font-family: var(--font-mono);
   font-size: 0.8rem;
-  clip-path: polygon(
-    0 0,
-    calc(100% - 10px) 0,
-    100% 10px,
-    100% 100%,
-    10px 100%,
-    0 calc(100% - 10px)
-  );
+  transition:
+    border-color 240ms ease,
+    background-color 240ms ease,
+    box-shadow 240ms ease;
 }
 
-.guard-row-passed {
-  border-color: rgb(0 255 65 / 0.36);
-  color: var(--color-green);
+.guard-label {
+  color: rgb(229 225 228 / 0.85);
 }
 
 .guard-pip {
   width: 0.5rem;
   height: 0.5rem;
-  background: currentColor;
-  box-shadow: 0 0 14px currentColor;
+  background: rgb(185 204 178 / 0.55);
+}
+
+.guard-row-passed {
+  border-color: rgb(0 255 65 / 0.4);
+  background: rgb(0 255 65 / 0.06);
+  box-shadow: 0 0 18px -6px rgb(0 255 65 / 0.35);
+}
+
+.guard-row-passed .guard-label {
+  color: var(--color-green);
+}
+
+.guard-row-passed .guard-pip {
+  background: var(--color-green);
+  box-shadow: 0 0 14px var(--color-green);
 }
 
 .auth-state {
   border: 1px solid rgb(255 255 255 / 0.12);
   padding: 0.45rem 0.65rem;
   color: rgb(229 225 228 / 0.5);
-  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-family: var(--font-mono);
   font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -65,7 +73,7 @@
   display: grid;
   gap: 0.55rem;
   color: var(--color-muted);
-  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.06em;
@@ -102,7 +110,7 @@
 .lab-action {
   min-height: 3rem;
   padding: 0 1.1rem;
-  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-family: var(--font-mono);
   font-size: 0.78rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -114,7 +122,7 @@
   margin: 1.1rem 0 0;
   overflow-x: auto;
   color: var(--color-muted);
-  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-family: var(--font-mono);
   font-size: 0.78rem;
   line-height: 1.85;
   white-space: pre-wrap;
@@ -131,7 +139,7 @@
   border-top: 1px solid var(--color-line);
   padding-top: 1rem;
   color: rgb(0 255 65 / 0.82);
-  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-family: var(--font-mono);
   font-size: 0.72rem;
   line-height: 1.7;
 }

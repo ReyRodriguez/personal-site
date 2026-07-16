@@ -1,50 +1,30 @@
-<section
-  id="labs"
-  class="capability-shell scroll-mt-28 px-5 py-24 sm:px-8 lg:px-20"
->
-  <div class="mx-auto w-full max-w-[var(--layout-max)]">
-    <div class="mb-10 grid gap-5 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
-      <div>
-        <p class="terminal-label text-matrix-green">
-          RECRUITER.PROOF / FULLSTACK_MATRIX
-        </p>
-        <h2
-          class="mt-5 text-4xl font-semibold leading-tight text-text-primary sm:text-5xl"
-        >
-          Capability Matrix
-        </h2>
-      </div>
-      <p
-        class="max-w-3xl text-base leading-8 text-text-muted lg:justify-self-end"
-      >
-        Mapa de pruebas tecnicas para que una entrevista no dependa solo de
-        keywords: cada modulo muestra una capacidad concreta y verificable.
-      </p>
-    </div>
+<section id="labs" class="capability-shell section-shell scroll-mt-28">
+  <div class="section-inner">
+    <app-section-header
+      appReveal
+      index="04"
+      kicker="CAPABILITIES"
+      [title]="header().title"
+      [lede]="header().lede"
+    />
 
     <div class="capability-grid">
-      @for (capability of capabilities; track capability.id) {
-        <article class="capability-card glass-panel hover-border-glow group">
-          <div class="flex items-center justify-between gap-3">
-            <span class="capability-id">{{ capability.id }}</span>
-            <span
-              class="capability-status"
-              [class]="'status-' + capability.status"
-            >
-              {{ capability.status }}
-            </span>
-          </div>
-          <h3
-            class="mt-5 text-xl font-semibold leading-tight text-text-primary"
-          >
-            {{ capability.title }}
+      @for (capability of capabilities; track capability.id; let i = $index) {
+        <article
+          class="capability-card glass-panel hover-border-glow group"
+          appReveal
+          [revealDelay]="i * 60"
+        >
+          <span class="capability-id" aria-hidden="true">{{ capability.id }}</span>
+          <h3 class="mt-4 text-lg font-semibold leading-snug text-text-primary">
+            {{ capability.title[locale()] }}
           </h3>
-          <p class="mt-3 text-sm leading-6 text-text-muted">
-            {{ capability.proof }}
+          <p class="mt-2 flex-1 text-sm leading-6 text-text-muted">
+            {{ capability.proof[locale()] }}
           </p>
           <ul class="mt-5 flex flex-wrap gap-2">
             @for (tech of capability.stack; track tech) {
-              <li class="capability-chip">{{ tech }}</li>
+              <li class="chip">{{ tech }}</li>
             }
           </ul>
         </article>

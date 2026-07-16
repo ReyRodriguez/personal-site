@@ -1,19 +1,20 @@
 <header class="top-nav-shell fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5">
   <nav
-    class="top-nav mx-auto flex h-14 max-w-[var(--layout-max)] items-center justify-between gap-4 px-4 sm:px-8"
-    aria-label="Navegacion principal"
+    class="top-nav mx-auto flex h-14 max-w-[var(--layout-max)] items-center justify-between gap-4 px-4 sm:px-6"
+    [attr.aria-label]="navAria()"
   >
     <a
-      class="brand-code shrink-0 text-matrix-green"
+      class="brand shrink-0"
       href="#root"
       (click)="activate('root')"
-      aria-label="Ir al inicio"
+      aria-label="Reyderson Rodriguez — inicio"
     >
-      NEURAL_ARCHITECT_V1.0
+      <span class="brand-mark" aria-hidden="true">RR</span>
+      <span class="brand-name">REYDERSON RODRIGUEZ</span>
     </a>
 
     <div
-      class="nav-links flex min-w-0 flex-1 justify-center gap-2 overflow-x-auto"
+      class="nav-links flex min-w-0 flex-1 justify-center gap-1 overflow-x-auto"
     >
       @for (item of navItems; track item.id) {
         <a
@@ -22,16 +23,31 @@
           [href]="'#' + item.id"
           (click)="activate(item.id)"
         >
-          <span aria-hidden="true">//</span>{{ item.label }}
+          <span class="nav-slash" aria-hidden="true">/</span>{{ item.label }}
         </a>
       }
     </div>
 
-    <div
-      class="status-cluster hidden shrink-0 items-center gap-2 font-mono text-xs sm:flex"
-    >
-      <span>Status: Online</span>
-      <span class="status-ping ml-2 opacity-60" aria-hidden="true"></span>
+    <div class="lang-toggle shrink-0" role="group" aria-label="Language">
+      <button
+        type="button"
+        class="lang-btn"
+        [class.lang-btn-active]="locale() === 'es'"
+        [attr.aria-pressed]="locale() === 'es'"
+        (click)="setLocale('es')"
+      >
+        ES
+      </button>
+      <span class="lang-sep" aria-hidden="true">/</span>
+      <button
+        type="button"
+        class="lang-btn"
+        [class.lang-btn-active]="locale() === 'en'"
+        [attr.aria-pressed]="locale() === 'en'"
+        (click)="setLocale('en')"
+      >
+        EN
+      </button>
     </div>
   </nav>
 </header>

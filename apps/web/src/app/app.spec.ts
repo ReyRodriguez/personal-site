@@ -10,15 +10,22 @@ describe('App', () => {
     }).compileComponents();
   });
 
-  it('should render the portfolio hero', async () => {
+  it('should render the portfolio hero and section scaffolding', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
+
+    // Name is locale-independent.
     expect(compiled.querySelector('h1')?.textContent).toContain(
       'Reyderson Rodriguez',
     );
-    expect(compiled.textContent).toContain('JWT Auth Lab');
-    expect(compiled.textContent).toContain('Operational CRUD Lab');
-    expect(compiled.textContent).toContain('Backend, Data & Delivery');
+
+    // Section kickers are code-style labels shared by both locales.
+    expect(compiled.textContent).toContain('PROJECTS.INDEX');
+    expect(compiled.textContent).toContain('CAPABILITIES');
+    expect(compiled.textContent).toContain('SYSTEM.BLUEPRINT');
+
+    // Default (SSR) locale is Spanish.
+    expect(compiled.textContent).toContain('Trabajo desplegado');
   });
 });

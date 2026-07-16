@@ -12,5 +12,10 @@ canvas {
   display: block;
   width: 100%;
   height: 100%;
+  opacity: 0;
+  transition: opacity 1200ms ease;
+}
+
+canvas.is-ready {
   opacity: 0.86;
 }

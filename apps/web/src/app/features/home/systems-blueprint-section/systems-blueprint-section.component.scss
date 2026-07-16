@@ -1,9 +1,6 @@
 :host {
-  display: block;
-}
-
-.systems-shell {
   position: relative;
+  display: block;
   background:
     radial-gradient(
       circle at 82% 18%,
@@ -11,6 +8,18 @@
       transparent 28rem
     ),
     radial-gradient(circle at 22% 84%, rgb(0 241 254 / 0.06), transparent 30rem);
+}
+
+.blueprint-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .blueprint-grid {
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: start;
+  }
 }
 
 .tabs {
@@ -21,10 +30,11 @@
 
 .tab-button {
   border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 0;
   padding: 0.7rem 1rem;
   color: var(--color-muted);
   background: transparent;
-  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -39,16 +49,26 @@
 
 .blueprint-panel,
 .system-card {
+  border-radius: 0;
   padding: 1.5rem;
+}
+
+.card-caption {
+  margin: 0.5rem 0 0;
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
 }
 
 .blueprint-code {
   margin: 1.5rem 0 0;
   overflow-x: auto;
   border-top: 1px solid rgb(255 255 255 / 0.08);
+  border-radius: 0;
   padding-top: 1rem;
   color: rgb(0 230 57 / 0.78);
-  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-family: var(--font-mono);
   font-size: 0.82rem;
   line-height: 1.8;
   white-space: pre-wrap;
@@ -60,6 +80,7 @@
   gap: 0.75rem;
   align-items: center;
   border: 1px solid rgb(0 230 57 / 0.2);
+  border-radius: 0;
   padding: 0.8rem;
   color: var(--color-muted);
 }
@@ -69,7 +90,7 @@
 .pipeline-step code,
 .budget-grid dt,
 .budget-grid dd {
-  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-family: var(--font-mono);
   font-size: 0.72rem;
 }
 

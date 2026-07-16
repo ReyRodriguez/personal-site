@@ -4,6 +4,7 @@ import {
   isMainModule,
   writeResponseToNodeResponse,
 } from '@angular/ssr/node';
+import compression from 'compression';
 import express from 'express';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -13,6 +14,12 @@ const browserDistFolder = resolve(serverDistFolder, '../browser');
 
 const app = express();
 const angularApp = new AngularNodeAppEngine();
+
+/**
+ * Gzip/deflate every response (HTML, JS, CSS, JSON). Behind a CDN this may be
+ * handled upstream, but compressing here keeps the standalone server correct.
+ */
+app.use(compression());
 
 /**
  * Example Express Rest API endpoints can be defined here.

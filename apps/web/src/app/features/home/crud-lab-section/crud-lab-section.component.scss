@@ -3,7 +3,6 @@
 }
 
 .crud-shell {
-  position: relative;
   background:
     radial-gradient(
       circle at 10% 20%,
@@ -13,8 +12,14 @@
     radial-gradient(circle at 92% 72%, rgb(0 230 57 / 0.06), transparent 28rem);
 }
 
-.section-copy {
-  align-self: center;
+.crud-body {
+  display: grid;
+  gap: 2rem;
+}
+
+.crud-panels {
+  display: grid;
+  gap: 1.25rem;
 }
 
 .crud-stats {
@@ -22,6 +27,7 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   border-top: 1px solid rgb(255 255 255 / 0.1);
   border-left: 1px solid rgb(255 255 255 / 0.1);
+  align-self: start;
 }
 
 .crud-stats div {
@@ -36,7 +42,7 @@
 .crud-status,
 .crud-delete,
 .crud-form span {
-  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-family: var(--font-mono);
   font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.06em;
@@ -50,7 +56,7 @@
 .crud-stats dd {
   margin: 0.35rem 0 0;
   color: var(--color-cyan);
-  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-family: var(--font-mono);
   font-size: 2rem;
   font-weight: 900;
 }
@@ -60,6 +66,7 @@
   grid-template-columns: 1fr;
   gap: 1rem;
   padding: 1.25rem;
+  border-radius: 0;
 }
 
 .crud-form label {
@@ -91,13 +98,15 @@
 .crud-submit {
   min-height: 3rem;
   padding-inline: 1rem;
-  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  border-radius: 0;
+  font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 800;
 }
 
 .crud-table-shell {
   overflow: hidden;
+  border-radius: 0;
 }
 
 .crud-toolbar {
@@ -130,7 +139,7 @@
   margin: 0.3rem 0 0;
   color: var(--color-text);
   font-size: 1rem;
-  font-weight: 650;
+  font-weight: 600;
 }
 
 .crud-id {
@@ -142,6 +151,7 @@
 .crud-delete {
   justify-self: start;
   border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 0;
   padding: 0.42rem 0.55rem;
   color: var(--color-muted);
   background: transparent;
@@ -174,7 +184,7 @@
   margin: 0;
   padding: 1.25rem;
   color: var(--color-muted);
-  font-family: 'Geist Mono Variable', 'SFMono-Regular', Consolas, monospace;
+  font-family: var(--font-mono);
 }
 
 @media (min-width: 720px) {
@@ -190,5 +200,13 @@
 
   .crud-row {
     grid-template-columns: 1fr auto auto auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .crud-body {
+    grid-template-columns: 0.7fr 1.3fr;
+    align-items: start;
+    gap: 2rem;
   }
 }

@@ -3,65 +3,65 @@
   class="hero-shell relative isolate min-h-screen scroll-mt-28 px-5 pb-8 pt-28 sm:px-8 lg:px-20"
 >
   <div
-    class="mx-auto grid min-h-[calc(100vh-7rem)] w-full max-w-[var(--layout-max)] grid-cols-1 content-center gap-10 lg:grid-cols-12 lg:gap-6"
+    class="mx-auto grid min-h-[calc(100vh-7rem)] w-full max-w-[var(--layout-max)] grid-cols-1 content-center gap-10 lg:grid-cols-12 lg:gap-8"
   >
     <article
       class="relative z-10 flex max-w-5xl flex-col justify-center lg:col-span-7"
     >
       <p
-        class="terminal-label mb-8 inline-flex items-center gap-4 text-electric-cyan"
+        class="terminal-label mb-7 inline-flex items-center gap-4 text-electric-cyan"
       >
         <span class="h-px w-8 bg-electric-cyan"></span>
-        SYSTEM_INITIALIZED
+        {{ t().eyebrow }}
       </p>
 
       <h1
-        class="max-w-5xl text-balance text-5xl font-bold leading-[1.04] text-text-primary sm:text-6xl lg:text-7xl"
+        class="hero-name max-w-4xl text-5xl font-bold leading-[0.98] text-text-primary sm:text-6xl lg:text-[5.25rem]"
       >
-        {{ profile().name }} <br />
-        <span class="text-text-muted">// SENIOR FULL STACK</span>
+        {{ identity.name }}
       </h1>
 
       <p
-        class="mt-5 max-w-3xl font-mono text-base text-matrix-green sm:text-lg"
+        class="hero-role mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-matrix-green"
       >
-        {{ profile().role }} - {{ profile().location }} /
-        {{ profile().timezone }}
+        <span class="hero-role-tag">{{ t().roleTag }}</span>
+        <span class="hero-role-dot" aria-hidden="true">//</span>
+        <span class="text-text-muted">{{ t().locationLine }}</span>
       </p>
 
       <p
-        class="mt-8 max-w-3xl text-xl leading-8 text-text-primary/88 sm:text-2xl sm:leading-9"
+        class="mt-9 max-w-3xl text-xl leading-8 text-text-primary/90 sm:text-[1.6rem] sm:leading-[1.35]"
       >
-        {{ profile().headline }}
+        {{ t().headline }}
       </p>
 
-      <p class="mt-6 max-w-3xl text-base leading-8 text-text-muted sm:text-lg">
-        {{ profile().summary }}
+      <p class="mt-6 max-w-2xl text-base leading-7 text-text-muted sm:text-lg">
+        {{ t().summary }}
       </p>
 
       <div class="mt-10 flex flex-col gap-3 sm:flex-row">
         <a
           class="hero-action btn-glitch"
-          [href]="'mailto:' + profile().email"
-          aria-label="Contactar por correo"
+          [href]="'mailto:' + identity.email"
+          [attr.aria-label]="t().ctaContact"
         >
-          INIT_CONTACT()
+          {{ t().ctaContact }}
         </a>
         <a
           class="hero-action btn-ghost"
-          [href]="profile().linkedinUrl"
+          [href]="identity.linkedinUrl"
           target="_blank"
           rel="noreferrer"
-          aria-label="Abrir perfil de LinkedIn"
+          [attr.aria-label]="t().ctaLinkedin"
         >
-          VIEW_LINKEDIN
+          {{ t().ctaLinkedin }}
         </a>
       </div>
 
       <dl
-        class="mt-12 grid max-w-4xl grid-cols-1 border-y border-surface-line sm:grid-cols-3"
+        class="mt-14 grid max-w-4xl grid-cols-1 border-y border-surface-line sm:grid-cols-3"
       >
-        @for (metric of profile().metrics; track metric.label) {
+        @for (metric of t().metrics; track metric.label) {
           <div class="metric-cell py-6 sm:px-6">
             <dt class="font-mono text-3xl font-bold text-electric-cyan">
               {{ metric.value }}
@@ -76,7 +76,7 @@
 
     <aside
       class="relative z-10 grid content-center gap-5 lg:col-span-5"
-      aria-label="Panel tecnico del perfil"
+      aria-label="Terminal"
     >
       <div class="hero-terminal glass-panel hover-border-glow">
         <div class="hero-terminal-topbar">
@@ -90,16 +90,14 @@
           >
         </div>
 
-        <div class="pipboy-screen">
-          <div class="pipboy-hud" aria-hidden="true">
-            <span>STATS</span>
-            <span>LVL 19</span>
-            <span>HP 220/220</span>
-            <span>AP 75/75</span>
+        <div class="terminal-screen">
+          <div class="terminal-motd" aria-hidden="true">
+            <span class="motd-pip"></span>
+            <span class="motd-text">reyderson.dev — portfolio ops shell</span>
           </div>
 
           <div class="zsh-output" aria-live="polite">
-            @for (line of typedLines(); track line) {
+            @for (line of typedLines(); track $index) {
               <div class="zsh-row">
                 <span class="zsh-prompt">reydev</span>
                 <span class="zsh-path">~/portfolio</span>
@@ -116,12 +114,12 @@
             </div>
           </div>
 
-          <div class="pipboy-footer" aria-hidden="true">
-            <span>Status</span>
-            <span>SPECIAL</span>
-            <span class="active">Skills</span>
-            <span>Perks</span>
-            <span>General</span>
+          <div class="terminal-status" aria-hidden="true">
+            <span class="stat-seg stat-branch">git:main</span>
+            <span class="stat-seg">zsh</span>
+            <span class="stat-fill"></span>
+            <span class="stat-seg">utf-8</span>
+            <span class="stat-seg">GMT-4</span>
           </div>
         </div>
       </div>
@@ -130,13 +128,23 @@
         id="stack"
         class="hud-panel hover-border-glow scroll-mt-28 p-5 sm:p-6"
       >
-        <p class="terminal-label text-electric-cyan">stack.map</p>
-        <ul
-          class="mt-5 flex flex-wrap gap-2"
-          aria-label="Tecnologias principales"
-        >
-          @for (tech of profile().stack; track tech) {
-            <li class="tech-chip">{{ tech }}</li>
+        <p class="terminal-label text-electric-cyan">{{ t().stackMain }}</p>
+        <ul class="mt-4 flex flex-wrap gap-2" [attr.aria-label]="t().stackMain">
+          @for (tech of mainStack; track tech.icon) {
+            <li class="chip chip-tech">
+              <span class="chip-ic" [innerHTML]="icon(tech.icon)"></span>
+              {{ tech.name }}
+            </li>
+          }
+        </ul>
+
+        <p class="terminal-label mt-6 text-outline">{{ t().stackOther }}</p>
+        <ul class="mt-4 flex flex-wrap gap-2" [attr.aria-label]="t().stackOther">
+          @for (tech of otherStack; track tech.icon) {
+            <li class="chip chip-tech chip-tech-muted">
+              <span class="chip-ic" [innerHTML]="icon(tech.icon)"></span>
+              {{ tech.name }}
+            </li>
           }
         </ul>
       </div>
