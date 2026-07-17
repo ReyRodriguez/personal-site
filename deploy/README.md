@@ -62,8 +62,11 @@ systemctl enable portfolio-api portfolio-web
 
 Let the `deploy` user restart the services without a password (used by CI):
 ```bash
-# /etc/sudoers.d/portfolio  (visudo -f /etc/sudoers.d/portfolio)
-deploy ALL=(root) NOPASSWD: /bin/systemctl restart portfolio-api, /bin/systemctl restart portfolio-web
+# /etc/sudoers.d/portfolio  (visudo -f /etc/sudoers.d/portfolio; chmod 440)
+# The deploy workflow restarts BOTH services in one invocation, so the combined
+# form must be whitelisted too. Use the real binary path (/usr/bin/systemctl on
+# Ubuntu 24.04 — /bin is merged into /usr/bin), or sudo prompts for a password.
+deploy ALL=(root) NOPASSWD: /usr/bin/systemctl restart portfolio-api portfolio-web, /usr/bin/systemctl restart portfolio-api, /usr/bin/systemctl restart portfolio-web
 ```
 
 ## 4. Nginx + HTTPS
