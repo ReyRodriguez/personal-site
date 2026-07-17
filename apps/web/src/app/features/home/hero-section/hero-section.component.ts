@@ -35,6 +35,11 @@ interface Tech {
   readonly icon: string;
 }
 
+interface TerminalLine {
+  readonly id: number;
+  readonly text: string;
+}
+
 const IDENTITY = {
   name: 'Reyderson Rodriguez',
   email: 'r.reydev@gmail.com',
@@ -147,7 +152,11 @@ export class HeroSectionComponent implements AfterViewInit, OnDestroy {
     'ready: robust UI + resilient APIs + AI-assisted delivery',
   ];
 
-  protected readonly typedLines = signal<readonly string[]>([]);
+  // Committed lines carry a stable id so each new line is a fresh DOM node that
+  // plays the scroll-in animation — tracking by index would reuse nodes and the
+  // animation would stop firing once the buffer is full.
+  private lineSeq = 0;
+  protected readonly typedLines = signal<readonly TerminalLine[]>([]);
   protected readonly currentTypedLine = signal('');
 
   ngAfterViewInit(): void {
@@ -179,7 +188,9 @@ export class HeroSectionComponent implements AfterViewInit, OnDestroy {
 
     if (this.charIndex >= currentLine.length) {
       this.ngZone.run(() => {
-        this.typedLines.update((lines) => [...lines, currentLine].slice(-8));
+        this.typedLines.update((lines) =>
+          [...lines, { id: this.lineSeq++, text: currentLine }].slice(-8),
+        );
         this.currentTypedLine.set('');
       });
       this.lineIndex += 1;

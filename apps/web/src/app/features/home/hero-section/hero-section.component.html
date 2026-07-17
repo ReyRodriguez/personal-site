@@ -97,12 +97,12 @@
           </div>
 
           <div class="zsh-output" aria-live="polite">
-            @for (line of typedLines(); track $index) {
+            @for (line of typedLines(); track line.id) {
               <div class="zsh-row">
                 <span class="zsh-prompt">reydev</span>
                 <span class="zsh-path">~/portfolio</span>
                 <span class="zsh-symbol">❯</span>
-                <span>{{ line }}</span>
+                <span>{{ line.text }}</span>
               </div>
             }
             <div class="zsh-row zsh-row-current">
