@@ -1,0 +1,70 @@
+name: deploy
+
+# Push-to-deploy: builds on a Linux runner, ships artifacts to the droplet,
+# runs migrations, and restarts the systemd services.
+#
+# Required repo secrets (Settings -> Secrets and variables -> Actions):
+#   DEPLOY_HOST     droplet IP or hostname
+#   DEPLOY_USER     ssh user (e.g. deploy)
+#   DEPLOY_SSH_KEY  private key (PEM) whose public key is in the user's authorized_keys
+#
+# NOTE: provision the droplet and add these secrets BEFORE this lands on main,
+# otherwise the first run fails harmlessly. See deploy/README.md.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest # x64 — must match the droplet arch (Prisma engine)
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Generate Prisma client
+        run: npx prisma generate --schema apps/api/prisma/schema.prisma
+
+      - name: Build API + web
+        run: |
+          npx nx build api
+          npx nx build web
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          ssh-keyscan -H "${{ secrets.DEPLOY_HOST }}" >> ~/.ssh/known_hosts
+          cat > ~/.ssh/config <<EOF
+          Host droplet
+            HostName ${{ secrets.DEPLOY_HOST }}
+            User ${{ secrets.DEPLOY_USER }}
+            IdentityFile ~/.ssh/id_deploy
+          EOF
+
+      - name: Ship build + runtime deps
+        # node_modules ships the x64-generated Prisma client so the droplet does
+        # zero install. --delete keeps it in sync. dist/browser + dist/server too.
+        run: |
+          rsync -az --delete dist node_modules package.json package-lock.json droplet:/srv/portfolio/
+          rsync -azR apps/api/prisma droplet:/srv/portfolio/
+
+      - name: Migrate + restart
+        run: |
+          ssh droplet 'set -e; cd /srv/portfolio; \
+            ./node_modules/.bin/dotenv -e apps/api/.env -- \
+              ./node_modules/.bin/prisma migrate deploy --schema apps/api/prisma/schema.prisma; \
+            sudo systemctl restart portfolio-api portfolio-web'

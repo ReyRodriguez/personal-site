@@ -1,0 +1,24 @@
+# /etc/systemd/system/portfolio-web.service
+# Angular SSR server (Express). Env is passed inline (no secrets here).
+# NG_ALLOWED_HOSTS is REQUIRED or SSR silently falls back to client rendering.
+# API_BASE_URL is the loopback origin the SSR process fetches the API from.
+[Unit]
+Description=Portfolio Angular SSR
+After=network.target portfolio-api.service
+Wants=portfolio-api.service
+
+[Service]
+Type=simple
+User=deploy
+WorkingDirectory=/srv/portfolio
+Environment=NODE_ENV=production
+Environment=PORT=4000
+Environment=NG_ALLOWED_HOSTS=yourdomain.com,www.yourdomain.com
+Environment=API_BASE_URL=http://127.0.0.1:3000
+ExecStart=/usr/bin/node dist/apps/web/server/server.mjs
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

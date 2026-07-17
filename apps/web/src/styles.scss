@@ -191,12 +191,11 @@ textarea {
     padding: 1px;
     background: conic-gradient(
       from var(--border-angle),
-      transparent 0deg 250deg,
-      rgb(0 241 254 / 0) 250deg,
-      rgb(0 241 254 / 0.85) 315deg,
-      rgb(114 255 112 / 1) 342deg,
-      rgb(116 29 255 / 0.95) 353deg,
-      transparent 360deg
+      rgb(255 255 255 / 0.1) 0deg 300deg,
+      rgb(0 241 254 / 0.85) 320deg,
+      rgb(114 255 112 / 1) 340deg,
+      rgb(116 29 255 / 0.95) 350deg,
+      rgb(255 255 255 / 0.1) 360deg
     );
     -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
@@ -213,12 +212,12 @@ textarea {
   }
 
   .hover-border-glow:hover {
-    border-color: rgb(255 255 255 / 0.16);
+    border-color: transparent;
   }
 
   .hover-border-glow:hover::before {
     opacity: 1;
-    animation: rotate-border-angle 7s linear infinite;
+    animation: rotate-border-angle 14s linear infinite;
   }
 
   .btn-glitch {

@@ -1,0 +1,19 @@
+# /etc/systemd/system/portfolio-api.service
+# NestJS API. Reads secrets from /srv/portfolio/apps/api/.env via NestJS ConfigModule.
+[Unit]
+Description=Portfolio NestJS API
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=simple
+User=deploy
+WorkingDirectory=/srv/portfolio
+ExecStart=/usr/bin/node dist/apps/api/main.js
+Restart=on-failure
+RestartSec=3
+# Harden a little
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
