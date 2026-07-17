@@ -13,7 +13,7 @@ User=deploy
 WorkingDirectory=/srv/portfolio
 Environment=NODE_ENV=production
 Environment=PORT=4000
-Environment=NG_ALLOWED_HOSTS=yourdomain.com,www.yourdomain.com
+Environment=NG_ALLOWED_HOSTS=142.93.254.109
 Environment=API_BASE_URL=http://127.0.0.1:3000
 ExecStart=/usr/bin/node dist/apps/web/server/server.mjs
 Restart=on-failure
