@@ -1,0 +1,21 @@
+<a
+  class="post-row"
+  [routerLink]="['/blog', post().slug]"
+  appReveal
+  [revealDelay]="delay()"
+>
+  <span class="post-meta font-mono">
+    <span class="post-date">{{ date() }}</span>
+    <span class="post-read">{{ post().readingMinutes }} {{ t().min }}</span>
+  </span>
+  <div class="post-body">
+    <p class="terminal-label mb-2 text-matrix-green">{{ post().tag }}</p>
+    <h3 class="post-title text-xl font-semibold leading-snug text-text-primary sm:text-2xl">
+      {{ post().title[locale()] }}
+    </h3>
+    <p class="post-excerpt mt-2 text-sm leading-6 text-text-muted">
+      {{ post().excerpt[locale()] }}
+    </p>
+  </div>
+  <span class="post-arrow font-mono" aria-hidden="true">→</span>
+</a>

@@ -1,0 +1,41 @@
+<section class="section-shell scroll-mt-28">
+  <div class="admin-auth-inner">
+    <div class="glass-panel admin-panel">
+      <p class="terminal-label text-matrix-green">{{ t().kicker }}</p>
+      <h1 class="admin-title">{{ t().title }}</h1>
+      <p class="admin-lede">{{ t().lede }}</p>
+
+      <form class="admin-form" [formGroup]="form" (ngSubmit)="submit()">
+        <label class="field">
+          <span class="field-label font-mono">{{ t().email }}</span>
+          <input
+            class="field-input"
+            type="email"
+            formControlName="email"
+            autocomplete="username"
+            [attr.aria-invalid]="form.controls.email.touched && form.controls.email.invalid"
+          />
+        </label>
+
+        <label class="field">
+          <span class="field-label font-mono">{{ t().password }}</span>
+          <input
+            class="field-input"
+            type="password"
+            formControlName="password"
+            autocomplete="current-password"
+            [attr.aria-invalid]="form.controls.password.touched && form.controls.password.invalid"
+          />
+        </label>
+
+        @if (error()) {
+          <p class="admin-error font-mono">{{ error() }}</p>
+        }
+
+        <button class="btn-glitch admin-submit" type="submit" [disabled]="submitting()">
+          {{ submitting() ? t().submitting : t().submit }}
+        </button>
+      </form>
+    </div>
+  </div>
+</section>

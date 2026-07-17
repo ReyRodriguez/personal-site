@@ -4,17 +4,27 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-Personal portfolio for Reyderson Rodriguez — an Nx-managed Angular 21 monorepo. Only the `web` app exists today; a NestJS `api`, Prisma/PostgreSQL layer, and shared `libs/` are documented as the target architecture in `docs/architecture.md` but not yet implemented.
+Personal portfolio for Reyderson Rodriguez — an Nx-managed Angular 21 monorepo. Two apps exist: the Angular SSR `web` app, and a NestJS `api` (`apps/api`) that powers the blog — backed by PostgreSQL via Prisma, with a shared types lib (`libs/contracts`, alias `@portfolio/contracts`). The remaining backend surface in `docs/architecture.md` (comments, metrics, contact) is still target architecture, not built.
 
 ## Commands
 
 ```bash
-npm start                 # nx serve web (SSR dev server, http://localhost:4200)
+npm start                 # nx serve web (SSR dev server, http://localhost:4200; proxies /api → :3000)
 npm run build             # nx build web (production, SSR output to dist/apps/web)
 npm run lint              # nx lint web
 npm run e2e               # nx e2e web-e2e (Playwright)
 npx nx affected -t lint   # run a target only on affected projects
+
+# Blog backend (apps/api + PostgreSQL)
+npm run db:up             # docker compose up -d (Postgres on :5432)
+npm run prisma:migrate    # apply Prisma migrations (loads apps/api/.env)
+npm run prisma:seed       # seed admin user + migrate the 3 original posts as drafts
+npm run api:serve         # nx serve api (NestJS on :3000, /api prefix)
+npm run api:build         # nx build api (webpack, tsc compiler for decorator metadata)
+npm run prisma:studio     # inspect the DB
 ```
+
+Local dev needs three things running: Postgres (`db:up`), the API (`api:serve`), and the web app (`start`). Copy `apps/api/.env.example` → `apps/api/.env` first. The web dev server proxies `/api` to the API (`apps/web/proxy.conf.json`), so the browser stays same-origin.
 
 Playwright targets are inferred by the `@nx/playwright` Nx plugin (not declared in `project.json`). To run a single e2e test: `npx nx e2e web-e2e -- --grep "test name"`.
 
@@ -26,7 +36,20 @@ Single-page, SSR-enabled Angular app. Everything renders on one route (`app.rout
 
 - **`features/home/*-section/`** — one standalone component per page section (hero, ai-flux, projects, experience, capability-matrix, auth-lab, crud-lab, systems-blueprint, logs). Each is a folder with `.ts` / `.html` / `.scss`.
 - **`shared/`** — cross-section components: `hacky-background` (animated backdrop), `top-nav`, `site-footer`.
-- **SSR**: `main.ts` (browser) + `main.server.ts` + `server.ts` (Express). `app.config.ts` uses `provideClientHydration(withEventReplay())`. The Express server in `server.ts` is where future `/api/**` REST endpoints would mount.
+- **SSR**: `main.ts` (browser) + `main.server.ts` + `server.ts` (Express). `app.config.ts` uses `provideClientHydration(withEventReplay())` and `provideHttpClient(withFetch())`. Blog routes are dynamic: `app.routes.server.ts` marks `blog` and `blog/:slug` as `RenderMode.Server` (per-request SSR, fetched from the API) and `admin/**` as `RenderMode.Client` (never prerender authed pages); everything else prerenders.
+- **Standalone SSR server host check**: Angular 21's SSR engine validates the `Host` header (SSRF guard). When running the built server directly (`node dist/apps/web/server/server.mjs`), set `NG_ALLOWED_HOSTS` (comma-separated) to the serving host(s), and `API_BASE_URL` to the API origin the SSR process should fetch from — otherwise SSR silently falls back to client rendering.
+
+### Blog & backend (`apps/api`)
+
+The blog is full-stack. `apps/api` is a NestJS app (webpack build, `compiler: 'tsc'` so decorator metadata is emitted) exposing under `/api`:
+
+- **Public** (`modules/blog`): `GET /api/blog/posts` (published, newest first, `?tag=` filter) and `GET /api/blog/posts/:slug`.
+- **Auth** (`modules/auth`): `POST /api/auth/login` (bcrypt + Passport-JWT, token set as an httpOnly cookie), `POST /api/auth/logout`, `GET /api/auth/me`. Single admin, seeded from `ADMIN_EMAIL`/`ADMIN_PASSWORD`.
+- **Admin** (`modules/admin`, all behind `JwtAuthGuard`): CRUD + `PATCH :id/publish`. DTOs use `class-validator`; `readingMinutes` and the slug are computed server-side.
+
+Data model (`apps/api/prisma/schema.prisma`): a single `Post` (bilingual sibling columns `titleEs`/`titleEn`/… + Markdown `bodyEs`/`bodyEn`, `published`, `publishedAt`) and a `User`. The API maps rows to the `Bi<T>` (`{ es, en }`) wire shapes in `libs/contracts` (`@portfolio/contracts`), shared by both apps.
+
+Frontend data flow: `shared/api/api.ts` holds the `API_BASE_URL` token + interceptor (prefixes the origin, `withCredentials`); public pages read via `httpResource` (SSR-transferred); the admin panel (`pages/admin/*`, first `ReactiveFormsModule` use) writes via `BlogAdminService` and `AuthStore`, guarded by `shared/auth/admin-auth.guard.ts`. Markdown bodies render through `shared/markdown/markdown.component.ts` — `marked` → `[innerHTML]`, which runs Angular's built-in sanitizer (isomorphic, no external sanitizer/jsdom). **Do not** bypass it with `DomSanitizer.bypassSecurityTrustHtml`, and do not add a DOMPurify/jsdom dependency (it bloated the SSR bundle ~6 MB).
 
 ### Conventions (follow these when adding/editing components)
 

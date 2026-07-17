@@ -1,0 +1,68 @@
+<section class="section-shell scroll-mt-28">
+  <div class="section-inner admin-inner">
+    <div class="admin-bar">
+      <div>
+        <p class="terminal-label text-matrix-green">{{ t().kicker }}</p>
+        <h1 class="admin-title">{{ t().title }}</h1>
+        <p class="admin-lede">{{ t().lede }}</p>
+      </div>
+      <div class="admin-actions">
+        <a class="btn-glitch" routerLink="/admin/posts/new">{{ t().newPost }}</a>
+        <button class="mini-btn" type="button" (click)="logout()">{{ t().logout }}</button>
+      </div>
+    </div>
+
+    @if (loading()) {
+      <p class="admin-status font-mono">{{ t().loading }}</p>
+    } @else if (error()) {
+      <p class="admin-error font-mono">{{ error() }}</p>
+    } @else {
+      @let list = posts();
+      @if (list.length) {
+        <div class="post-admin-list">
+          @for (post of list; track post.id) {
+            <div class="post-admin-row">
+              <div class="post-admin-main">
+                <p class="post-admin-title">{{ post.title[locale()] }}</p>
+                <p class="post-admin-meta">
+                  <span
+                    class="status-chip"
+                    [class.is-published]="post.published"
+                    [class.is-draft]="!post.published"
+                  >{{ post.published ? t().published : t().draft }}</span>
+                  <span>{{ post.tag }}</span>
+                  <span>/{{ post.slug }}</span>
+                  <span>{{ date(post) }}</span>
+                  <span>{{ post.readingMinutes }} {{ t().min }}</span>
+                </p>
+              </div>
+              <div class="post-admin-actions">
+                <a class="mini-btn" [routerLink]="['/admin/posts', post.id, 'edit']">
+                  {{ t().edit }}
+                </a>
+                <button
+                  class="mini-btn"
+                  type="button"
+                  [disabled]="busyId() === post.id"
+                  (click)="togglePublish(post)"
+                >
+                  {{ post.published ? t().unpublish : t().publish }}
+                </button>
+                <button
+                  class="mini-btn is-danger"
+                  type="button"
+                  [disabled]="busyId() === post.id"
+                  (click)="remove(post)"
+                >
+                  {{ t().delete }}
+                </button>
+              </div>
+            </div>
+          }
+        </div>
+      } @else {
+        <p class="admin-status font-mono">{{ t().empty }}</p>
+      }
+    }
+  </div>
+</section>

@@ -1,50 +1,36 @@
 <section class="section-shell scroll-mt-28">
-  @let entry = post();
-
-  @if (entry) {
-    <article class="article">
-      <a class="back-link font-mono" routerLink="/blog">// {{ t().back }}</a>
-
-      <header class="article-head">
-        <div class="head-meta">
-          <span class="terminal-label text-matrix-green">{{ entry.tag }}</span>
-          @if (entry.upcoming) {
-            <span class="post-soon">{{ t().soon }}</span>
-          }
-        </div>
-
-        <h1 class="article-title">{{ entry.title[locale()] }}</h1>
-
-        <p class="article-submeta font-mono">
-          <span>{{ entry.date }}</span>
-          <span class="dot" aria-hidden="true">·</span>
-          <span>{{ entry.readingMinutes }} {{ t().min }}</span>
-        </p>
-      </header>
-
-      <div class="prose">
-        @for (block of entry.body; track $index) {
-          @switch (block.type) {
-            @case ('h2') {
-              <h2 appReveal>{{ block.text[locale()] }}</h2>
-            }
-            @case ('code') {
-              <pre class="code-block" appReveal><code
-                >{{ block.text[locale()] }}</code></pre>
-            }
-            @default {
-              <p appReveal>{{ block.text[locale()] }}</p>
-            }
-          }
-        }
-      </div>
-    </article>
+  @if (post.isLoading()) {
+    <p class="article-status font-mono">{{ t().loading }}</p>
   } @else {
-    <div class="not-found glass-panel">
-      <p class="terminal-label text-matrix-green">404</p>
-      <h1 class="nf-title">{{ t().notFoundTitle }}</h1>
-      <p class="nf-body">{{ t().notFoundBody }}</p>
-      <a class="focus-link" routerLink="/blog">{{ t().notFoundLink }}</a>
-    </div>
+    @let entry = post.value();
+
+    @if (entry) {
+      <article class="article">
+        <a class="back-link font-mono" routerLink="/blog">// {{ t().back }}</a>
+
+        <header class="article-head">
+          <div class="head-meta">
+            <span class="terminal-label text-matrix-green">{{ entry.tag }}</span>
+          </div>
+
+          <h1 class="article-title">{{ entry.title[locale()] }}</h1>
+
+          <p class="article-submeta font-mono">
+            <span>{{ date() }}</span>
+            <span class="dot" aria-hidden="true">·</span>
+            <span>{{ entry.readingMinutes }} {{ t().min }}</span>
+          </p>
+        </header>
+
+        <app-markdown class="article-prose" [source]="entry.body[locale()]" appReveal />
+      </article>
+    } @else {
+      <div class="not-found glass-panel">
+        <p class="terminal-label text-matrix-green">404</p>
+        <h1 class="nf-title">{{ t().notFoundTitle }}</h1>
+        <p class="nf-body">{{ t().notFoundBody }}</p>
+        <a class="focus-link" routerLink="/blog">{{ t().notFoundLink }}</a>
+      </div>
+    }
   }
 </section>

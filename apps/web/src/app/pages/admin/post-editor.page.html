@@ -1,0 +1,98 @@
+<section class="section-shell scroll-mt-28">
+  <div class="section-inner admin-inner">
+    <div class="admin-bar">
+      <div>
+        <p class="terminal-label text-matrix-green">{{ t().kicker }}</p>
+        <h1 class="admin-title">{{ isEdit ? t().editTitle : t().newTitle }}</h1>
+      </div>
+      <a class="back-link" routerLink="/admin">// {{ t().back }}</a>
+    </div>
+
+    @if (loading()) {
+      <p class="admin-status font-mono">{{ t().loading }}</p>
+    } @else {
+      <form class="admin-form" [formGroup]="form" (ngSubmit)="save()">
+        <div class="field-row">
+          <label class="field">
+            <span class="field-label font-mono">{{ t().slug }}</span>
+            <input
+              class="field-input"
+              formControlName="slug"
+              [placeholder]="t().slugHint"
+            />
+          </label>
+          <label class="field">
+            <span class="field-label font-mono">{{ t().tag }}</span>
+            <input class="field-input" formControlName="tag" />
+          </label>
+        </div>
+
+        <div class="locale-tabs" role="tablist">
+          <button
+            type="button"
+            class="locale-tab"
+            [class.is-active]="editLocale() === 'es'"
+            (click)="setLocale('es')"
+          >ES</button>
+          <button
+            type="button"
+            class="locale-tab"
+            [class.is-active]="editLocale() === 'en'"
+            (click)="setLocale('en')"
+          >EN</button>
+        </div>
+
+        <div formGroupName="title">
+          <label class="field">
+            <span class="field-label font-mono">{{ t().title }} · {{ editLocale() === 'es' ? 'ES' : 'EN' }}</span>
+            <input class="field-input" formControlName="es" [hidden]="editLocale() !== 'es'" />
+            <input class="field-input" formControlName="en" [hidden]="editLocale() !== 'en'" />
+          </label>
+        </div>
+
+        <div formGroupName="excerpt">
+          <label class="field">
+            <span class="field-label font-mono">{{ t().excerpt }} · {{ editLocale() === 'es' ? 'ES' : 'EN' }}</span>
+            <input class="field-input" formControlName="es" [hidden]="editLocale() !== 'es'" />
+            <input class="field-input" formControlName="en" [hidden]="editLocale() !== 'en'" />
+          </label>
+        </div>
+
+        <div class="editor-split">
+          <label class="field" formGroupName="body">
+            <span class="field-label font-mono">{{ t().body }} · {{ editLocale() === 'es' ? 'ES' : 'EN' }}</span>
+            <textarea class="field-textarea" formControlName="es" [hidden]="editLocale() !== 'es'"></textarea>
+            <textarea class="field-textarea" formControlName="en" [hidden]="editLocale() !== 'en'"></textarea>
+          </label>
+          <div class="editor-preview">
+            <p class="editor-preview-label font-mono">{{ t().preview }}</p>
+            <app-markdown [source]="preview()" />
+          </div>
+        </div>
+
+        <label class="check-field">
+          <input type="checkbox" formControlName="published" />
+          <span>{{ t().publishedLabel }}</span>
+        </label>
+
+        @if (error()) {
+          <p class="admin-error font-mono">{{ error() }}</p>
+        }
+
+        <div class="admin-actions">
+          <button class="btn-glitch admin-submit" type="submit" [disabled]="saving()">
+            {{ saving() ? t().saving : t().save }}
+          </button>
+          @if (isEdit) {
+            <button
+              class="mini-btn is-danger"
+              type="button"
+              [disabled]="saving()"
+              (click)="remove()"
+            >{{ t().deleteLabel }}</button>
+          }
+        </div>
+      </form>
+    }
+  </div>
+</section>

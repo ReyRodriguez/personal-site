@@ -7,33 +7,21 @@
       [lede]="t().lede"
     />
 
-    <div class="post-list border-t border-white/10">
-      @for (post of posts; track post.slug; let i = $index) {
-        <a
-          class="post-row"
-          [routerLink]="['/blog', post.slug]"
-          appReveal
-          [revealDelay]="i * 70"
-        >
-          <span class="post-meta font-mono">
-            <span class="post-date">{{ post.date }}</span>
-            <span class="post-read">{{ post.readingMinutes }} {{ t().min }}</span>
-            @if (post.upcoming) {
-              <span class="post-soon">{{ t().soon }}</span>
-            }
-          </span>
-          <div class="post-body">
-            <p class="terminal-label mb-2 text-matrix-green">{{ post.tag }}</p>
-            <h3 class="post-title text-xl font-semibold leading-snug text-text-primary sm:text-2xl">
-              {{ post.title[locale()] }}
-            </h3>
-            <p class="post-excerpt mt-2 text-sm leading-6 text-text-muted">
-              {{ post.excerpt[locale()] }}
-            </p>
-          </div>
-          <span class="post-arrow font-mono" aria-hidden="true">→</span>
-        </a>
+    @if (posts.isLoading()) {
+      <p class="post-status font-mono">{{ t().loading }}</p>
+    } @else if (posts.error()) {
+      <p class="post-status post-error font-mono">{{ t().error }}</p>
+    } @else {
+      @let list = posts.value() ?? [];
+      @if (list.length) {
+        <div class="post-list border-t border-white/10">
+          @for (post of list; track post.slug; let i = $index) {
+            <app-post-row [post]="post" [delay]="i * 70" />
+          }
+        </div>
+      } @else {
+        <p class="post-status font-mono">{{ t().empty }}</p>
       }
-    </div>
+    }
   </div>
 </section>

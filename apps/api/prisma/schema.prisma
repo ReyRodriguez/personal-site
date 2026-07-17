@@ -1,0 +1,42 @@
+// Blog data model for the portfolio API.
+// Bilingual text is stored as sibling columns (…Es/…En) and mapped to `Bi`
+// objects in the API response layer. See libs/contracts for the wire shapes.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Post {
+  id             String    @id @default(cuid())
+  slug           String    @unique
+  // Single category shown in the UI (e.g. "frontend", "backend").
+  tag            String
+  titleEs        String
+  titleEn        String
+  excerptEs      String
+  excerptEn      String
+  bodyEs         String // raw Markdown
+  bodyEn         String // raw Markdown
+  published      Boolean   @default(false)
+  publishedAt    DateTime?
+  readingMinutes Int       @default(1)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@index([published, publishedAt])
+  @@map("posts")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+
+  @@map("users")
+}

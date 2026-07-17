@@ -1,4 +1,5 @@
 import { Route } from '@angular/router';
+import { adminAuthGuard } from './shared/auth/admin-auth.guard';
 
 export const appRoutes: Route[] = [
   {
@@ -36,6 +37,33 @@ export const appRoutes: Route[] = [
     loadComponent: () =>
       import('./pages/blog/blog-post.page').then((m) => m.BlogPostPage),
     title: 'Blog · Reyderson Rodriguez',
+  },
+  {
+    path: 'admin/login',
+    loadComponent: () =>
+      import('./pages/admin/admin-login.page').then((m) => m.AdminLoginPage),
+    title: 'Admin · Iniciar sesión',
+  },
+  {
+    path: 'admin',
+    canActivate: [adminAuthGuard],
+    loadComponent: () =>
+      import('./pages/admin/admin-posts.page').then((m) => m.AdminPostsPage),
+    title: 'Admin · Blog',
+  },
+  {
+    path: 'admin/posts/new',
+    canActivate: [adminAuthGuard],
+    loadComponent: () =>
+      import('./pages/admin/post-editor.page').then((m) => m.PostEditorPage),
+    title: 'Admin · Nueva entrada',
+  },
+  {
+    path: 'admin/posts/:id/edit',
+    canActivate: [adminAuthGuard],
+    loadComponent: () =>
+      import('./pages/admin/post-editor.page').then((m) => m.PostEditorPage),
+    title: 'Admin · Editar entrada',
   },
   { path: '**', redirectTo: '' },
 ];

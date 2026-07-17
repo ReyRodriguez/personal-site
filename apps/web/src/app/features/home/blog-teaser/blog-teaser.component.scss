@@ -2,63 +2,14 @@
   display: block;
 }
 
-.post-row {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.5rem 1.5rem;
-  align-items: start;
-  border-bottom: 1px solid rgb(255 255 255 / 0.1);
-  padding: 1.6rem 0;
-  transition: background-color 220ms ease;
+.post-list {
+  border-top: 1px solid rgb(255 255 255 / 0.1);
 }
 
-.post-row:hover {
-  background: rgb(255 255 255 / 0.02);
-}
-
-.post-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  font-size: 0.78rem;
-  color: rgb(0 241 254 / 0.7);
-}
-
-.post-soon {
-  align-self: flex-start;
-  padding: 0.1rem 0.4rem;
-  border: 1px solid rgb(116 29 255 / 0.4);
-  color: #d1bcff;
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.post-title {
-  letter-spacing: -0.01em;
-  transition: color 220ms ease;
-}
-
-.post-row:hover .post-title {
-  color: var(--color-cyan);
-}
-
-.post-excerpt {
-  max-width: 62ch;
-}
-
-.post-arrow {
-  justify-self: start;
-  color: rgb(132 150 126 / 0.64);
-  transition:
-    color 220ms ease,
-    transform 220ms ease;
-}
-
-.post-row:hover .post-arrow {
-  color: var(--color-green-soft);
-  transform: translateX(4px);
+.post-status {
+  margin-top: 1.75rem;
+  color: rgb(132 150 126 / 0.75);
+  font-size: 0.85rem;
 }
 
 .post-viewall {
@@ -72,12 +23,4 @@
 .post-viewall::before {
   content: '// ';
   color: rgb(0 241 254 / 0.5);
-}
-
-@media (min-width: 768px) {
-  .post-row {
-    grid-template-columns: 8.5rem 1fr auto;
-    align-items: center;
-    padding-inline: 0.25rem;
-  }
 }

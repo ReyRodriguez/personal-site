@@ -1,5 +1,7 @@
 # Arquitectura Inicial
 
+> **Estado de implementación (blog):** el flujo del blog ya está construido y difiere en detalles de la estructura objetivo de abajo. Lo real: `apps/api` (NestJS + Prisma + PostgreSQL) con módulos `blog`/`auth`/`admin`; `libs/contracts` (`@portfolio/contracts`) para tipos compartidos; Prisma vive en `apps/api/prisma/` (no en `/prisma` raíz) y fijado a **v6**; el modelo es un único `Post` bilingüe (Markdown) + `User` admin — sin tablas `tags`/`comments`/`reading_metrics` (se descartaron por no tener consumidor). Auth = un admin con Passport-JWT + bcrypt en cookie httpOnly. Los `libs/domain-blog` y `libs/ui` siguen siendo objetivo, no construidos. Ver `docs/setup.md` para la puesta en marcha.
+
 ## Decision De Repositorio
 
 La base recomendada es un monorepo integrado con Nx. Para este portafolio es la opcion mas eficiente porque el frontend, la API y los contratos compartidos evolucionan juntos, con cache de tareas, lint/test/build centralizados y una ruta simple para compartir tipos entre Angular y NestJS.
