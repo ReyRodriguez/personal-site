@@ -28,10 +28,11 @@ export class AuthController {
 
   private cookieOptions(): CookieOptions {
     const isProd = this.config.get<string>('NODE_ENV') === 'production';
+    const disableSecure = this.config.get<string>('DISABLE_SECURE_COOKIE') === 'true';
     return {
       httpOnly: true,
       sameSite: 'lax',
-      secure: isProd,
+      secure: isProd && !disableSecure,
       path: '/',
       maxAge: COOKIE_MAX_AGE_MS,
     };
